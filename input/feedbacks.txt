@@ -1,0 +1,4 @@
+Plusieurs utilisateurs se plaignent que l’inscription mobile est lente, et que le bouton de validation ne répond pas.
+Certains aimeraient pouvoir enregistrer leurs produits préférés pour les retrouver plus tard.
+Beaucoup ne trouvent pas l’option de filtrage des produits par prix ou par catégorie.
+Des utilisateurs ont demandé à recevoir une notification quand un produit en rupture est à nouveau disponible.
