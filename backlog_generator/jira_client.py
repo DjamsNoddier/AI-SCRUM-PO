@@ -92,7 +92,16 @@ def export_user_stories_to_jira(stories):
     print("🚀 Export des User Stories vers Jira...\n")
 
     for i, s in enumerate(stories, start=1):
-        summary = s.get("idea", "User Story sans titre").capitalize()
+    # 🧠 Utilisation du titre généré par le LLM s’il existe
+        summary = s.get("title") or s.get("idea", "").strip()
+        
+
+        # Si c’est trop court ou trop long, reformule à partir de la User Story
+        if len(summary) < 30 or not summary:
+            summary = s.get("user_story", "User Story générée").split("afin")[0].strip()
+        if len(summary) > 250:
+            summary = summary[:247] + "..."
+
         description_md = (
             f"### Contexte\n\n{s['user_story']}\n\n"
             f"### Critères d’acceptation\n"

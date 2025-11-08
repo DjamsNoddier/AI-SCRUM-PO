@@ -140,3 +140,39 @@ def generate_user_stories(ideas: List[str]) -> List[Dict]:
 
     print("🎯 Génération terminée.")
     return all_stories
+
+def generate_short_title(user_story_text: str) -> str:
+    """
+    Génère un titre court et clair à partir d'une User Story complète,
+    en se basant sur son intention principale.
+    """
+    from groq import Groq
+    import os
+
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
+    prompt = f"""
+    Voici une User Story :
+    ---
+    {user_story_text}
+    ---
+    Génère un titre court et explicite (5 à 10 mots max)
+    qui résume l'objectif principal de cette User Story.
+    Ne répète pas "En tant que..." ni "afin de...".
+    Exemple :
+      "En tant qu'utilisateur, je veux recevoir des alertes météo..."
+      → "Alerte météo automatique"
+    """
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {"role": "system", "content": "Tu es un expert Jira et rédacteur de backlog agile."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.4,
+    )
+
+    title = response.choices[0].message.content.strip()
+    title = title.replace('"', '').replace("'", "")
+    return title
