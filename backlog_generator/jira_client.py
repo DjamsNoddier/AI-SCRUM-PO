@@ -1,122 +1,118 @@
 """
-jira_client.py — version corrigée (Jira Cloud API v3)
-- Corrige le format Priority (string)
-- Corrige le format Description (ADF JSON)
+jira_client.py
+--------------
+Gestion de la création automatique de User Stories dans Jira Cloud.
 """
 
 import os
-from typing import Dict, List, Optional
-from pathlib import Path
 import requests
 from dotenv import load_dotenv
+from pathlib import Path
+import time
 
-# --- Charge .env depuis la racine du projet ---
+# -------------------------
+# 🔧 Chargement de la configuration Jira
+# -------------------------
 ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
-JIRA_URL = os.getenv("JIRA_URL", "").rstrip("/")
-JIRA_EMAIL = os.getenv("JIRA_EMAIL", "")
-JIRA_API_TOKEN = os.getenv("JIRA_API_TOKEN", "")
-JIRA_PROJECT_KEY = os.getenv("JIRA_PROJECT_KEY", "")
+JIRA_URL = (os.getenv("JIRA_URL") or "").rstrip("/")
+JIRA_EMAIL = os.getenv("JIRA_EMAIL")  # <-- on standardise sur JIRA_EMAIL
+JIRA_API_TOKEN = os.getenv("JIRA_API_TOKEN")
+JIRA_PROJECT_KEY = os.getenv("JIRA_PROJECT_KEY")
 
-def _auth():
-    if not (JIRA_URL and JIRA_EMAIL and JIRA_API_TOKEN and JIRA_PROJECT_KEY):
-        raise RuntimeError(
-            "Config Jira incomplète. Vérifie ton .env (JIRA_URL, JIRA_EMAIL, JIRA_API_TOKEN, JIRA_PROJECT_KEY)"
-        )
-    return (JIRA_EMAIL, JIRA_API_TOKEN)
+def _ensure_config():
+    missing = [k for k, v in {
+        "JIRA_URL": JIRA_URL,
+        "JIRA_EMAIL": JIRA_EMAIL,
+        "JIRA_API_TOKEN": JIRA_API_TOKEN,
+        "JIRA_PROJECT_KEY": JIRA_PROJECT_KEY
+    }.items() if not v]
+    if missing:
+        raise RuntimeError(f"Variables d'environnement manquantes: {', '.join(missing)}. "
+                           f"Vérifie ton fichier .env à la racine du projet ({ENV_PATH}).")
 
-# --- Conversion description Markdown -> ADF (Atlassian Document Format) ---
-def _to_adf(description_md: str) -> dict:
+# -------------------------
+# 🧱 Création d'une User Story unique
+# -------------------------
+def create_jira_issue(summary: str, description_md: str):
     """
-    Convertit un texte structuré en ADF pour Jira Cloud (titres + listes à puces)
+    Crée une User Story dans Jira Cloud avec description en format texte.
     """
-    lines = [l.strip() for l in description_md.split("\n") if l.strip()]
-    content = []
-    bullet_items = []
+    if not all([JIRA_URL, JIRA_EMAIL, JIRA_API_TOKEN, JIRA_PROJECT_KEY]):
+        print("❌ Variables d'environnement Jira manquantes. Vérifie ton .env.")
+        return None
 
-    def flush_bullets():
-        nonlocal bullet_items
-        if bullet_items:
-            content.append({"type": "bulletList", "content": bullet_items})
-            bullet_items = []
-
-    for line in lines:
-        if line.startswith("### "):  # titre
-            flush_bullets()
-            content.append({
-                "type": "heading",
-                "attrs": {"level": 3},
-                "content": [{"type": "text", "text": line.replace("### ", "").strip()}]
-            })
-        elif line.startswith("- "):  # élément de liste
-            bullet_items.append({
-                "type": "listItem",
-                "content": [{
-                    "type": "paragraph",
-                    "content": [{"type": "text", "text": line[2:].strip()}]
-                }]
-            })
-        else:  # paragraphe
-            flush_bullets()
-            content.append({
-                "type": "paragraph",
-                "content": [{"type": "text", "text": line}]
-            })
-    flush_bullets()
-
-    return {"type": "doc", "version": 1, "content": content}
-
-
-def create_jira_issue(summary: str,
-                      user_story_text: str,
-                      acceptance_criteria: list,
-                      priority: str = "Medium",
-                      labels: Optional[List[str]] = None) -> Optional[str]:
-    """
-    Crée une Story dans Jira avec description ADF bien formatée :
-    - summary = titre court
-    - description = Contexte + Critères d’acceptation
-    """
     url = f"{JIRA_URL}/rest/api/3/issue"
-    auth = _auth()
-
-    # Nettoie le titre : extrait la partie après "je veux"
-    title = summary
-    if "je veux" in summary.lower():
-        title = summary.split("je veux")[-1].strip().capitalize()
-
-    # Nettoie les critères (supprime la ligne qui contient "Critères")
-    cleaned_criteria = [
-        c.replace("**", "").strip()
-        for c in acceptance_criteria
-        if "critère" not in c.lower()
-    ]
-
-    # Description Markdown claire
-    description_md = f"""### Contexte
-{user_story_text}
-
-### Critères d’acceptation
-""" + "\n".join([f"- {c}" for c in cleaned_criteria])
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
+    auth = (JIRA_EMAIL, JIRA_API_TOKEN)
 
     payload = {
         "fields": {
             "project": {"key": JIRA_PROJECT_KEY},
-            "summary": title[:254],
-            "description": _to_adf(description_md),
+            "summary": summary,
             "issuetype": {"name": "Story"},
+            "description": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {"type": "text", "text": description_md}
+                        ]
+                    }
+                ]
+            }
         }
     }
 
-    if labels:
-        payload["fields"]["labels"] = labels
+    response = requests.post(url, json=payload, headers=headers, auth=auth)
 
-    resp = requests.post(url, json=payload, auth=auth)
-    if resp.status_code == 201:
-        key = resp.json().get("key")
-        print(f"✅ Story créée : {key}")
-        return key
+    if response.status_code == 201:
+        issue_key = response.json()["key"]
+        return issue_key
     else:
-        print(f"❌ Erreur Jira ({resp.status_code}) : {resp.text}")
+        print(f"❌ Erreur Jira ({response.status_code}) : {response.text}")
         return None
+
+
+# -------------------------
+# 🚀 Export en lot vers Jira
+# -------------------------
+def export_user_stories_to_jira(stories):
+    """
+    Exporte plusieurs User Stories vers Jira.
+    stories : liste d'objets { idea, user_story, acceptance_criteria, priority }
+    """
+    created_issues = []
+    print("🚀 Export des User Stories vers Jira...\n")
+
+    for i, s in enumerate(stories, start=1):
+        summary = s.get("idea", "User Story sans titre").capitalize()
+        description_md = (
+            f"### Contexte\n\n{s['user_story']}\n\n"
+            f"### Critères d’acceptation\n"
+            + "\n".join(f"- {c}" for c in s["acceptance_criteria"])
+            + f"\n\n⭐ **Priorité : {s['priority']}**"
+        )
+
+        print(f"➡️ ({i}/{len(stories)}) Création de l’US : {summary}")
+
+        issue_key = create_jira_issue(summary=summary, description_md=description_md)
+
+        if issue_key:
+            print(f"   ✅ Créée avec succès → {issue_key}\n")
+            created_issues.append(issue_key)
+        else:
+            print(f"   ❌ Erreur sur la création de {summary}\n")
+
+        time.sleep(1)
+
+    print("🎯 Export terminé !")
+    print(f"Total : {len(created_issues)} User Stories créées ✅")
+
+    return created_issues
