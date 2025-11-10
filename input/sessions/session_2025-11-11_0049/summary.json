@@ -1,0 +1,14 @@
+{
+    "session_id": "session_2025-11-11_0049",
+    "audio_file": "input/sessions/session_2025-11-11_0049/audio.wav",
+    "started_at": "2025-11-11T00:49:09.398806",
+    "ended_at": "2025-11-11T00:49:10.600360",
+    "duration_sec": 1,
+    "timestamp_summary": "2025-11-11T00:49:11.096699",
+    "quality": {
+        "global_score": 0.85
+    },
+    "user_story_count": 0,
+    "themes_detected": [],
+    "top_user_stories": []
+}

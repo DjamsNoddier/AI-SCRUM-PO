@@ -1,0 +1,10 @@
+{
+    "session_id": "session_2025-11-11_0046",
+    "start_time": "2025-11-11T00:46:49.015340",
+    "end_time": "2025-11-11T00:47:02.646557",
+    "duration_sec": 13,
+    "audio_file": "input/sessions/session_2025-11-11_0046/audio.wav",
+    "folder_path": "input/sessions/session_2025-11-11_0046",
+    "processed": true,
+    "status": "completed"
+}
