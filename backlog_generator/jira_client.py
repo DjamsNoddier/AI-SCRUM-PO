@@ -92,22 +92,30 @@ def export_user_stories_to_jira(stories):
     print("🚀 Export des User Stories vers Jira...\n")
 
     for i, s in enumerate(stories, start=1):
-    # 🧠 Utilisation du titre généré par le LLM s’il existe
-        summary = s.get("title") or s.get("idea", "").strip()
-        
+       # 🧠 Titre prioritaire généré par le modèle
+        summary = (s.get("title") or "").strip()
 
-        # Si c’est trop court ou trop long, reformule à partir de la User Story
-        if len(summary) < 30 or not summary:
-            summary = s.get("user_story", "User Story générée").split("afin")[0].strip()
+        # Si vide, fallback sur l'idée ou la première phrase de l'US
+        if not summary:
+            summary = s.get("idea", "").strip() or s.get("user_story", "").split(".")[0]
+
+        #   Limitation et nettoyage
+        summary = summary.strip()
         if len(summary) > 250:
             summary = summary[:247] + "..."
+        if not summary:
+            summary = "User Story sans titre"
 
         description_md = (
-            f"### Contexte\n\n{s['user_story']}\n\n"
-            f"### Critères d’acceptation\n"
-            + "\n".join(f"- {c}" for c in s["acceptance_criteria"])
-            + f"\n\n⭐ **Priorité : {s['priority']}**"
+            f"## 🎯 User Story\n"
+            f"{s['user_story']}\n\n"
+            f"## 💡 Idée d’origine\n"
+            f"{s.get('idea', '—')}\n\n"
+            f"## ✅ Critères d’acceptation\n"
+            + "\n".join(f"- {c}" for c in s.get("acceptance_criteria", []))
+            + f"\n\n⭐ **Priorité : {s.get('priority', 'Non définie')}**"
         )
+
 
         print(f"➡️ ({i}/{len(stories)}) Création de l’US : {summary}")
 

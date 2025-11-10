@@ -12,25 +12,47 @@ Auteur : Djamil
 
 import os
 import re
+import json
 from pathlib import Path
-from groq import Groq
+from difflib import SequenceMatcher
 from dotenv import load_dotenv
+from groq import Groq
+from .consolidator import consolidate_user_stories
+from .generator import generate_user_story, generate_short_title
+from .jira_client import export_user_stories_to_jira
+
 
 # -------------------------
-# ⚙️ 1️⃣ Configuration et client Groq
+# ⚙️ Initialisation
 # -------------------------
 env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 # -------------------------
-# 🎧 2️⃣ Transcription Audio → Texte
+# 🧰 Nettoyage / déduplication
+# -------------------------
+def _normalize(txt: str) -> str:
+    return re.sub(r"\s+", " ", txt.strip().lower())
+
+def _similar(a: str, b: str) -> float:
+    return SequenceMatcher(None, _normalize(a), _normalize(b)).ratio()
+
+def dedupe_keep_order(items: list[str], threshold: float = 0.88) -> list[str]:
+    """Supprime les doublons tout en gardant l’ordre logique."""
+    out = []
+    for it in items:
+        if not it or len(it.strip()) < 5:
+            continue
+        if not any(_similar(it, x) >= threshold for x in out):
+            out.append(it.strip())
+    return out
+
+
+# -------------------------
+# 🎧 Transcription Audio → Texte
 # -------------------------
 def transcribe_audio(file_path: str) -> str:
-    """
-    Transcrit un fichier audio (mp3, wav, m4a, etc.) en texte clair.
-    Retourne le texte transcrit.
-    """
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"❌ Fichier introuvable : {file_path}")
 
@@ -46,203 +68,236 @@ def transcribe_audio(file_path: str) -> str:
 
 
 # -------------------------
-# 🧩 3️⃣ Segmentation par thèmes (clustering sémantique)
+# 🧩 Segmentation de la conversation
 # -------------------------
-def segment_conversation(transcribed_text: str) -> list:
+def segment_conversation_llm(transcribed_text: str) -> list[dict]:
     """
-    Segmente automatiquement la conversation en thèmes distincts.
-    Chaque segment correspond à un sujet ou besoin exprimé durant le rush.
+    Découpe le texte transcrit en segments thématiques exploitables pour le backlog.
     """
     prompt = f"""
-    Analyse ce texte issu d'une réunion ou d'un atelier produit.
-    Sépare la discussion en segments distincts selon les thèmes abordés ou les besoins exprimés.
-    Fournis la sortie sous ce format :
+Tu es un facilitateur d'atelier produit.
+Découpe le texte suivant en 3 à 8 segments logiques,
+chacun correspondant à un thème produit cohérent.
 
-    ### Thème : <titre du thème>
-    <texte du segment>
-    """
+- Ignore les salutations, transitions, ou phrases hors-sujet.
+- Donne pour chaque segment :
+  - "theme": titre court (max 8 mots)
+  - "content": le texte cohérent du segment
+- Réponds STRICTEMENT en JSON valide au format :
+{{"segments":[{{"theme":"...","content":"..."}}]}}.
 
+Texte :
+\"\"\"{transcribed_text}\"\"\"
+"""
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": "Réponds uniquement en JSON valide, sans texte hors JSON."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.25,
+        )
+        raw = response.choices[0].message.content.strip()
+        data = json.loads(raw)
+        return [
+            {"theme": s["theme"].strip(), "content": s["content"].strip()}
+            for s in data.get("segments", [])
+            if s.get("content") and len(s["content"].split()) > 5
+        ]
+    except Exception:
+        # fallback simple : 1 segment global
+        return [{"theme": "Discussion générale", "content": transcribed_text}]
+
+
+# -------------------------
+# 🧠 Détection du contenu produit
+# -------------------------
+def is_segment_about_product(segment_text: str) -> bool:
+    """Vérifie si un segment contient une discussion produit réelle."""
+    prompt = f"""
+Dis seulement "oui" ou "non".
+
+Réponds "oui" si ce texte contient une discussion produit :
+fonctionnalités, problèmes utilisateurs, idées d'amélioration,
+besoins métier, ou retours sur un produit existant.
+Sinon, réponds "non".
+
+Texte :
+\"\"\"{segment_text}\"\"\"
+"""
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": "Tu es un facilitateur d’atelier agile. Segmente la conversation par thèmes cohérents et exploitables pour un backlog produit."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.5,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0,
     )
-
-    text = response.choices[0].message.content.strip()
-    raw_segments = re.split(r"### Thème\s*:", text)
-    segments = []
-
-    for seg in raw_segments:
-        seg = seg.strip()
-        if not seg:
-            continue
-        lines = seg.split("\n", 1)
-        theme = lines[0].strip()
-        content = lines[1].strip() if len(lines) > 1 else ""
-        segments.append({"theme": theme, "content": content})
-
-    return segments
+    return "oui" in response.choices[0].message.content.lower()
 
 
 # -------------------------
-# 🧠 4️⃣ Extraction d'idées depuis chaque segment
+# 🧩 Extraction d’idées produit
 # -------------------------
-def extract_ideas_from_segment(segment_text: str) -> list[str]:
+def extract_ideas_from_segment(segment_text: str) -> list[dict]:
     """
-    Extrait plusieurs idées ou besoins concrets d'un segment thématique.
+    Extrait les besoins produit explicites et implicites du segment.
+    Retourne une liste structurée d'idées (JSON).
     """
     prompt = f"""
-    Analyse ce texte et identifie les besoins, frustrations ou suggestions concrètes exprimées.
-    Fournis une liste claire et concise (pas de phrases inutiles).
+Tu es un Product Manager senior assistant à un atelier produit.
+Analyse ce segment et identifie les besoins produit exprimés (ou implicites).
+Ignore le bruit conversationnel.
 
-    Texte :
-    {segment_text}
+Retourne STRICTEMENT en JSON :
+{{
+  "ideas": [
+    {{
+      "idea": "besoin ou problème détecté",
+      "title": "titre court et clair",
+      "why": "raison ou objectif du besoin",
+      "confidence": 0.0–1.0
+    }}
+  ]
+}}
 
-    Format attendu :
-    - Idée 1 : ...
-    - Idée 2 : ...
+Si aucune idée produit n'est trouvée : {{"ideas":[]}}
+
+Segment :
+\"\"\"{segment_text}\"\"\"
+"""
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": "Tu es un Product Manager expérimenté. Réponds UNIQUEMENT en JSON valide."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3,
+        )
+        data = json.loads(response.choices[0].message.content.strip())
+        return [
+            i for i in data.get("ideas", [])
+            if i.get("idea") and i.get("confidence", 0) >= 0.5
+        ]
+    except Exception:
+        return []
+
+# -------------------------
+# 📊 Scoring de la qualité globale
+# -------------------------
+def compute_us_quality_score(user_stories: list[dict]) -> dict:
     """
-
-    response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "system", "content": "Tu es un Product Owner qui extrait des besoins clairs à partir d’un verbatim d’utilisateur."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.4,
-    )
-
-    text = response.choices[0].message.content.strip()
-    ideas = []
-
-    for line in text.split("\n"):
-        line = line.strip(" -•\t")
-        if ":" in line:
-            ideas.append(line.split(":", 1)[1].strip())
-        elif len(line.split()) > 4:
-            ideas.append(line)
-
-    return ideas
-
-
-import re
-
-def local_segment_text(text):
+    Évalue la qualité globale des User Stories générées :
+    - confiance moyenne (si disponible dans les idées)
+    - diversité (thèmes distincts / total)
+    - ratio pertinence (titre + critères non vides)
     """
-    Segmente un texte transcrit en thèmes cohérents sans appel à un LLM.
-    Utilise la ponctuation et les mots-clés pour découper logiquement.
-    """
-    if not text or len(text.split()) < 30:
-        return [{"theme": "Discussion générale", "content": text}]
-    
-    # Nettoyage minimal
-    text = text.replace("\n", " ").strip()
+    if not user_stories:
+        return {"confidence": 0, "diversity": 0, "pertinence": 0, "global_score": 0}
 
-    # Découpage brut par connecteurs typiques
-    raw_segments = re.split(r"(?:\bdu coup\b|alors\b|donc\b|et puis\b|enfin\b|par ailleurs\b)", text, flags=re.IGNORECASE)
-    segments = []
+    # Moyenne des scores de confiance
+    confidences = [us.get("confidence", 0) for us in user_stories]
+    avg_confidence = sum(confidences) / len(confidences) if confidences else 0
 
-    for i, seg in enumerate(raw_segments, start=1):
-        seg = seg.strip(" .,-")
-        if len(seg.split()) < 5:
-            continue
-        theme = ""
-        if "températur" in seg.lower():
-            theme = "Alerte de température"
-        elif "prévision" in seg.lower() or "plateforme" in seg.lower():
-            theme = "Prévisions météo sur la plateforme"
-        elif "randonneur" in seg.lower() or "alpiniste" in seg.lower():
-            theme = "Expérience utilisateur en montagne"
-        else:
-            theme = f"Thème {i}"
+    # Diversité thématique
+    themes = {us["theme"] for us in user_stories if us.get("theme")}
+    diversity = len(themes) / len(user_stories)
 
-        segments.append({
-            "theme": theme,
-            "content": seg
-        })
-    
-    return segments
+    # Pertinence basique : titre et critères non vides
+    valid_us = [
+        us for us in user_stories
+        if us.get("title") and us.get("acceptance_criteria")
+    ]
+    pertinence = len(valid_us) / len(user_stories)
+
+    # Score global pondéré
+    global_score = round((avg_confidence * 0.5 + diversity * 0.3 + pertinence * 0.2), 2)
+
+    return {
+        "confidence": round(avg_confidence, 2),
+        "diversity": round(diversity, 2),
+        "pertinence": round(pertinence, 2),
+        "global_score": global_score
+    }
 
 
 # -------------------------
-# 🧩 5️⃣ Pipeline complet audio → US → Jira
+# 🚀 Pipeline complet : audio → US
 # -------------------------
-from .generator import generate_user_story, generate_short_title
-from .jira_client import export_user_stories_to_jira
-
 def process_audio_feedback(file_path: str, push_to_jira: bool = False):
-    """
-    Transcrit un fichier audio, segmente la discussion en thèmes,
-    extrait les besoins par segment et génère automatiquement
-    les User Stories correspondantes. (Optionnel : export Jira)
-    """
-    # Étape 1 : Transcription
+    """Pipeline principal complet"""
+    # Étape 1 : transcription
     text = transcribe_audio(file_path)
-
     print("\n🧠 Texte transcrit :")
-    print(text[:500] + ("..." if len(text) > 500 else ""))
+    print(text[:400] + ("..." if len(text) > 400 else ""))
 
-    # Étape 2 : Segmentation
+    # Étape 2 : segmentation
     print("\n🧩 Segmentation de la conversation...")
-    segments = local_segment_text(text)
+    segments = segment_conversation_llm(text)
     print(f"✅ {len(segments)} segment(s) détecté(s).\n")
 
-    all_stories = []
     user_stories = []
-    # Étape 3 : Boucle sur les segments
-    user_stories = []  # ✅ Liste principale des US
 
-    for i, seg in enumerate(segments, start=1):
-        print(f"🎯 Segment {i}/{len(segments)} — Thème : {seg['theme']}")
+    # Étape 3 : boucle segment → idées
+    for idx, seg in enumerate(segments, 1):
+        print(f"🎯 Segment {idx}/{len(segments)} — Thème : {seg['theme']}")
+        if not is_segment_about_product(seg["content"]):
+            print("🗨️ Segment conversationnel ignoré.\n")
+            continue
+
         ideas = extract_ideas_from_segment(seg["content"])
-
         if not ideas:
             print("⚠️ Aucun besoin détecté dans ce segment.\n")
             continue
 
-        print(f"💡 {len(ideas)} idée(s) détectée(s) :")
-        for j, idea in enumerate(ideas, start=1):
-            print(f"   {j}. {idea}")
+        print(f"💡 {len(ideas)} idée(s) pertinentes détectées :")
+        for idea in ideas[:2]:  # max 2 idées/segment pour éviter le spam
+            print(f"   → {idea['title']} ({idea['confidence']:.2f})")
 
-        # Génération des US pour chaque idée
-        for idea in ideas:
-            try:
-                story = generate_user_story(idea)
-                short_title = generate_short_title(story["user_story"])
+            story = generate_user_story(idea["idea"])
+            short_title = generate_short_title(story["user_story"])
 
-                user_stories.append({
-                    "theme": seg["theme"],
-                    "idea": idea,
-                    "title": short_title,
-                    **story
-                })
+            enriched = {
+                "theme": seg["theme"],
+                "idea": idea["idea"],
+                "title": short_title,
+                "why": idea.get("why", ""),
+                "confidence": idea.get("confidence", 0),
+                **story
+            }
+            user_stories.append(enriched)
+            print(f"✅ {short_title} → {story['user_story']}\n")
 
-                print(f"✅ {short_title} → {story['user_story']}\n")
+    # Étape 4 : consolidation finale
+    print("\n🔁 Consolidation des User Stories similaires...")
+    before = len(user_stories)
+    user_stories = consolidate_user_stories(user_stories, threshold=0.8)
+    after = len(user_stories)
+    print(f"✅ {before - after} fusion(s), {after} User Stories finales.\n")
 
-            except Exception as e:
-                print(f"❌ Erreur sur l’idée « {idea} » : {e}\n")
-
-    print(f"🎯 Génération terminée — {len(user_stories)} User Stories produites.\n")
-
-    # Étape 4 : Export Jira (optionnel)
+    # Étape 5 : export Jira
     if push_to_jira and user_stories:
-        print("🚀 Export des User Stories vers Jira...\n")
+        print("🚀 Export vers Jira...")
         export_user_stories_to_jira(user_stories)
     else:
-        print("ℹ️ Export Jira désactivé (push_to_jira=False).")
+        print("ℹ️ Export Jira désactivé.")
 
-    # Étape 5 : Résumé
+        # Évaluation de la qualité
+    print("\n📊 Évaluation de la qualité des User Stories...")
+    quality = compute_us_quality_score(user_stories)
+    print(f"   - Confiance moyenne : {quality['confidence']:.2f}")
+    print(f"   - Diversité thématique : {quality['diversity']:.2f}")
+    print(f"   - Pertinence : {quality['pertinence']:.2f}")
+    print(f"   👉 Score global : {quality['global_score']:.2f}\n")
+
+
+    # Résumé
     print("\n🧾 RÉSUMÉ FINAL -------------------")
-    print(f"🎙️ Fichier traité : {file_path}")
+    print(f"🎙️ Fichier : {file_path}")
     print(f"🧩 {len(segments)} segment(s) analysé(s)")
     print(f"🧱 {len(user_stories)} User Stories générée(s)\n")
-
-    for idx, us in enumerate(user_stories, 1):
-        print(f"{idx}. 🧱 [{us['theme']}] {us['title']}")
-        print(f"   ✅ Critères : {', '.join(us['acceptance_criteria'])}")
+    for i, us in enumerate(user_stories, 1):
+        print(f"{i}. 🧱 [{us['theme']}] {us['title']}")
+        print(f"   🗣️ Idée : {us['idea']}")
         print(f"   ⭐ Priorité : {us['priority']}\n")
 
     print("✅ Pipeline audio multi-intervenants terminé.")
