@@ -1,4 +1,4 @@
-Plusieurs utilisateurs se plaignent que l’inscription mobile est lente, et que le bouton de validation ne répond pas.
-Certains aimeraient pouvoir enregistrer leurs produits préférés pour les retrouver plus tard.
-Beaucoup ne trouvent pas l’option de filtrage des produits par prix ou par catégorie.
-Des utilisateurs ont demandé à recevoir une notification quand un produit en rupture est à nouveau disponible.
+Besoin : 
+Je veux derme une nouvelle release la release est très technique et besoin opérationnel il faut identifier les points clefs pour cette release j’ai besoin que la team op genre un package et une fois construite générer avec les client ce qui veulent comme contenu il le pousse sur une bucketentre temp quand moi je build mon bo le flux  , il faut checker la Bucket s3 si nouveau pack dispo ensuite et c’est pas compagnie (client) il y aura des spectacles pour ça ou alors je donne le package et au moment du build il va partir de ces package générer l’image du BO et en fin il ‘a pousse sur une Bucket s3 
+
+Quand je fais un build il produit une img docker abec le service bo toute les des et il va chercher le nouveau package sur S 3 et après toute mon image je Larousse sur un autre bucket S3 mais de staging ou de Dev ou de prof surveiller cette pipe-line :mettre une api qui va interroger les sittings des json qui va checker chaque compagnie Airline toues les compilante la date et le front consomme pour afficher le contenu 

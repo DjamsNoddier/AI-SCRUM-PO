@@ -1,3 +1,5 @@
+.venv/
+venv/
 .env
 *.env
 *.m4a
@@ -6,3 +8,14 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Fichiers d'entrée et de sessions
+input/sessions/*.wav
+input/sessions/*.json
+input/*.wav
+input/*.mp3
+
+# Fichiers temporaires / IDE
+.DS_Store
+.idea/
+*.log

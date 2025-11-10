@@ -16,6 +16,7 @@ from pathlib import Path
 from .generator import generate_user_story
 from .jira_client import export_user_stories_to_jira
 
+
 # Charger les variables d’environnement
 env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
