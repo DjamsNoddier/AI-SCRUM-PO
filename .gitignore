@@ -19,3 +19,4 @@ input/*.mp3
 .DS_Store
 .idea/
 *.log
+input/sessions/

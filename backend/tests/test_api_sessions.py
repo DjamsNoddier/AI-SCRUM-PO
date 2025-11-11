@@ -16,6 +16,7 @@ client = TestClient(app)
 SESSIONS_DIR = Path("input/sessions")
 
 
+
 def test_latest_session_endpoint():
     """Vérifie que l'API retourne un résumé de session cohérent."""
     # Vérifie qu'au moins une session existe

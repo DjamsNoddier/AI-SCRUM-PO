@@ -1,160 +1,234 @@
-🧠 AI Scrum PO Assistant
+# 🧠 AI Scrum PO Assistant — Backend
 
-AI Scrum PO Assistant is an intelligent product management tool that automatically transforms meeting audio into actionable User Stories — ready to be pushed directly into Jira.
+**AI Scrum PO Assistant** is an intelligent Product Management assistant that automatically transforms workshop discussions and meeting recordings into **actionable User Stories** — ready for Jira integration.
+It listens, understands, and structures product conversations like a real Product Owner — in seconds.
 
-It listens, understands, and structures product discussions just like a Product Owner would, saving hours of manual note-taking and backlog writing.
+---
 
-🚀 Overview
+## 🚀 Overview
 
-AI Scrum PO Assistant leverages speech-to-text, semantic segmentation, and LLM reasoning to extract real product needs from audio recordings or workshop discussions.
-It then generates complete User Stories — including title, description, acceptance criteria, and priority — and can automatically export them to Jira.
+This **backend (V1)** handles:
 
-This version (V1) is a fully functional MVP that works end-to-end from the terminal.
+* 🎤 Real-time audio recording from the terminal
+* 🧠 Transcription via **Groq Whisper API**
+* 🧩 Semantic segmentation & User Story generation
+* 📊 Session analysis and structured summaries
+* 🌐 REST API exposure via **FastAPI**
 
-🧩 Core Features
+---
 
-| 🎙️ **Audio Transcription**  | Converts audio recordings (MP3, WAV, M4A…) into clean, readable text using Whisper (Groq API).       |
-| 🧠 **Semantic Segmentation** | Automatically detects and separates discussion topics into coherent product segments.                |
-| 💡 **Idea Extraction**       | Identifies concrete product needs or improvement ideas using LLM-based reasoning.                    |
-| 🧱 **User Story Generation** | Produces full User Stories (`As a... I want... so that...`) with acceptance criteria and priorities. |
-| 🔁 **Consolidation**         | Merges duplicate or highly similar stories to avoid redundancy.                                      |
-| ⚖️ **Auto-Prioritization**   | Assigns a priority level (High / Medium / Low) based on theme and context.                           |
-| 🚀 **Jira Integration**      | Automatically creates Jira tickets for each generated User Story.                                    |
-| 📊 **Quality Scoring**       | Evaluates the batch by confidence, diversity, and relevance (average score shown at the end).        |
+## 🧩 Architecture
 
-🧱 Architecture
-
+```
 ai_scrum_po/
-│
-├── audio_transcriber.py     # Main pipeline (Audio → Segmentation → Ideas → US → Jira)
-├── consolidator.py           # Story merging, normalization, and prioritization
-├── generator.py              # Generates User Stories and acceptance criteria
-├── jira_client.py            # Handles Jira API authentication and push
-├── test_audio_to_jira.py     # CLI test runner for end-to-end validation
-├── .env                      # API keys (Groq, Jira, etc.)
-└── README.md                 # Documentation
+├── backend/
+│   ├── api/                      # REST API (FastAPI)
+│   │   └── main.py
+│   ├── backlog_generator/        # Main processing pipeline
+│   │   ├── audio_listener.py     # Audio recording + orchestration
+│   │   ├── audio_transcriber.py  # Transcription & segmentation
+│   │   ├── generator.py          # User Story generation (LLM)
+│   │   ├── session_summary.py    # Session summary & validation
+│   │   ├── logger_manager.py     # Structured logging manager
+│   │   └── __init__.py
+│   ├── tests/                    # Unit & integration tests
+│   │   ├── test_api_sessions.py
+│   │   ├── test_audio_listener.py
+│   │   ├── test_audio_logger.py
+│   │   ├── test_audio_summary.py
+│   │   └── test_logger_manager.py
+│   └── __init__.py
+├── Makefile                      # Simplified CLI commands
+├── requirements.txt              # Python dependencies
+├── pytest.ini                    # Pytest configuration
+└── README.md                     # Documentation
+```
 
+---
 
-⚙️ How It Works (Step by Step)
+## ⚙️ Installation
 
-Audio Transcription
-The system uses Whisper via Groq API to transcribe spoken discussions.
+### 🧮 Requirements
 
-Semantic Segmentation
-The text is split into logical themes or topics by LLM reasoning.
+* **Python 3.10+**
+* **Groq API key** (for transcription)
+* *(Optional)* Jira API credentials for story export
 
-Idea Extraction
-For each segment, product-relevant ideas are extracted (ignoring greetings, chatter, etc.).
+### 🔧 Setup
 
-User Story Generation
-Each idea is transformed into a fully structured User Story with acceptance criteria.
+```bash
+git clone <repo_url>
+cd ai_scrum_po
+python -m venv venv
+source venv/bin/activate   # On Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-Consolidation & Scoring
-Duplicate stories are merged and quality metrics are computed.
+### 🔐 Environment Configuration
 
-Jira Export (Optional)
-All validated stories are pushed directly to Jira via the REST API.
+Create a `.env` file at the root:
 
-🧩 Example Output
+```bash
+GROQ_API_KEY=your_groq_api_key
+```
 
-Input:
+> ⚠️ Don’t push this file to GitHub (already ignored in `.gitignore`).
 
-Audio meeting about Danger Wild product (149 words).
+---
 
-Output:
-✅ 3 segments detected
-✅ 4 User Stories generated
-✅ All stories exported to Jira (P1-44 → P1-47)
+## 🧑‍💻 Usage
 
-| Title                                           | Priority  | Jira Key |
-| ----------------------------------------------- | --------- | -------- |
-| Real-time abnormal temperature alerts           | 🔴 High   | P1-45    |
-| Sensitivity improvement for temperature sensors | 🟡 Medium | P1-47    |
-| Weather forecasts for outdoor planning          | 🟡 Medium | P1-46    |
-| Detailed hiking routes with real-time weather   | 🔴 High   | P1-44    |
+### 🎧 Record an Audio Session (Terminal)
 
-Quality score: 0.74 (Confidence: 0.78 / Relevance: 1.0 / Diversity: 0.5)
+Start listening and trigger the full pipeline:
 
-🧠 Roadmap
-✅ Current Version (V1)
+```bash
+make listen
+```
 
-Full pipeline working end-to-end in terminal
+Resulting output:
 
-Clean Jira integration
+```
+input/sessions/session_2025-11-11_1219/
+├── audio.wav
+├── metadata.json
+└── summary.json
+```
 
-Automatic scoring and consolidation
+Each session is automatically transcribed, segmented, scored, and summarized.
 
-🔜 Upcoming (V2)
+---
 
-“AI Contextual Product Copilot” — A version that understands the project context before listening.
+### 🌐 REST API (FastAPI)
 
-🧩 Context Loader: analyze project specs, Jira tickets, and sprint history
+Start the API server:
 
-🧠 Context Reasoner: understand what’s new vs. already known
+```bash
+make api
+```
 
-🎧 Live Meeting Listener: detect real decisions and product needs
+Access the API here:
+🔗 [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-📊 Decision Tracker: map meeting outcomes to Jira
+#### Main Endpoint
 
-💬 Auto-Brief Generator: prepare meeting summaries and discussion points
+```
+GET /api/sessions/latest
+```
 
-🔄 Continuous Learning: model improves from scoring feedback
+#### Example JSON Response
 
-🧰 Requirements
+```json
+{
+  "session_id": "session_2025-11-11_1219",
+  "audio_path": "input/sessions/session_2025-11-11_1219/audio.wav",
+  "score_global": 0.85,
+  "user_stories_count": 0,
+  "themes": [],
+  "duration_sec": 2
+}
+```
 
-Python 3.10+
+---
 
-Groq API key (for transcription & LLM)
+## 🤪 Automated Tests
 
-Jira API credentials (for export)
+Run all tests:
 
-Dependencies (see requirements.txt)
+```bash
+make test
+```
 
-🧑‍💻 Usage
+### 🗂️ Test Coverage
 
-From your terminal:
-python test_audio_to_jira.py
+| File                     | Purpose                                         |
+| ------------------------ | ----------------------------------------------- |
+| `test_audio_listener.py` | Tests full pipeline (recording + transcription) |
+| `test_api_sessions.py`   | Tests the `/api/sessions/latest` endpoint       |
+| `test_audio_summary.py`  | Validates `summary.json` consistency            |
+| `test_logger_manager.py` | Checks structured logging integrity             |
+| `test_audio_logger.py`   | Validates session log completeness              |
 
-Or to push directly to Jira:
-python test_audio_to_jira.py --push
+🧩 **All tests must pass before merging any PR.**
 
-Environment variables are stored in .env:
+---
 
-GROQ_API_KEY=your_groq_key
-JIRA_API_TOKEN=your_jira_token
-JIRA_URL=https://yourcompany.atlassian.net
-JIRA_PROJECT_KEY=P1
+## 📊 Processing Pipeline
 
+| Step                            | Description                                  |
+| ------------------------------- | -------------------------------------------- |
+| 🎤 Audio Recording              | Captures live audio input                    |
+| 🧠 Transcription (Groq Whisper) | Converts audio to text                       |
+| 🫩 Segmentation                 | Splits text into product-relevant themes     |
+| 💡 User Story Generation        | Builds complete User Stories (with criteria) |
+| 🔁 Consolidation                | Merges duplicates and scores quality         |
+| 📊 Summary Generation           | Outputs `metadata.json` and `summary.json`   |
+| 🌐 REST API                     | Exposes structured results to frontend       |
 
-🧩 Example Use Cases
+---
 
-Product workshops or brainstorming sessions
+## 🧱️ Makefile — Quick Commands
 
-Sprint reviews and planning meetings
+| Command       | Description                           |
+| ------------- | ------------------------------------- |
+| `make listen` | Start recording and run full pipeline |
+| `make api`    | Run FastAPI server                    |
+| `make test`   | Run all tests with Pytest             |
 
-Client feedback or voice notes analysis
+---
 
-User interviews and discovery calls
+## 🧠 Roadmap
 
-🧭 Vision
+| Version   | Description                                            |
+| --------- | ------------------------------------------------------ |
+| ✅ **V1**  | Complete backend — Audio → US + API + tests            |
+| 🔜 **V2** | React Frontend (User Story visualization & validation) |
+| 🚀 **V3** | Jira integration + contextual learning engine          |
 
-“A Product Management copilot that listens, understands, and remembers.”
+---
 
-The long-term goal is to build a context-aware and continuously learning AI Product Assistant capable of:
+## 🧩 Example Use Cases
 
-Reading project specs and history before each meeting,
+* 🎯 Product workshops & sprint reviews
+* 👤 Client feedback and discovery calls
+* 💬 User interviews & brainstorming sessions
+* 📋 Backlog grooming and prioritization meetings
 
-Understanding conversations with full context,
+---
 
-Generating structured outputs aligned with existing roadmaps,
+## 🦭 Vision
 
-Learning from user feedback to improve future sessions.
+> “A Product Management copilot that **listens, understands, and structures** ideas into action.”
 
-👨‍💻 Author
+Long-term goal:
 
-Djamil — Product Manager passionate about AI for Product Intelligence.
-🚀 Project developed as part of AI Scrum PO Assistant initiative.
+* Read project context before each session
+* Understand discussions within their roadmap
+* Auto-generate structured backlog items
+* Learn from user validation feedback
 
-🪪 License
+---
 
-MIT License — free to use, modify and distribute for both personal and professional purposes.
+## 👨‍💼 Author
+
+**Djamil**
+Product Manager passionate about **AI, Agile methods, and Product Intelligence**.
+Developed as part of the **AI Scrum PO Assistant** initiative.
+
+---
+
+## 🛋️ License
+
+**MIT License** — free to use, modify, and distribute for both personal and professional purposes.
+
+---
+
+## 📘 Next Step — Frontend (V2)
+
+The upcoming **React Frontend** will allow users to:
+
+* View and filter generated User Stories
+* Validate or reject proposals
+* Push stories directly to Jira
+
+> 🧱️ A separate repository (`ai_scrum_po_front/`) will host the frontend, connected to this backend via the REST API.
