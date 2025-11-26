@@ -11,15 +11,32 @@ import time
 from typing import List, Dict
 from dotenv import load_dotenv
 from pathlib import Path
-from groq import Groq
+from functools import lru_cache
+
+
 
 # -------------------------
-# ⚙️ Configuration environnement
+# ⚙️ Chargement du .env
 # -------------------------
-env_path = Path(__file__).resolve().parent.parent / ".env"
-load_dotenv(dotenv_path=env_path)
+ROOT_DIR = Path(__file__).resolve().parents[2]
+ENV_PATH = ROOT_DIR / ".env"
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+if ENV_PATH.exists():
+    load_dotenv(dotenv_path=ENV_PATH)
+else:
+    print(f"⚠️ Fichier .env non trouvé à {ENV_PATH}")
+
+# -------------------------
+# 🧠 Initialisation paresseuse du client Groq
+# -------------------------
+@lru_cache()
+def get_groq_client():
+    """Initialise le client Groq une seule fois et le met en cache."""
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        raise RuntimeError("❌ GROQ_API_KEY manquant. Vérifie ton fichier .env à la racine du projet.")
+    from groq import Groq
+    return Groq(api_key=api_key)
 
 # -------------------------
 # 🧩 1️⃣ Génération d'une seule User Story
@@ -46,7 +63,7 @@ Critères d’acceptation :
 
 Priorité : Haute / Moyenne / Basse
     """
-
+    client = get_groq_client()
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[

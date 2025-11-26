@@ -1,0 +1,194 @@
+{
+  "meeting_id": "meeting_2025-11-25_205347_c40e",
+  "audio_path": "input/projects/nouveau-1/meetings/2-test-2025-11-25-205347-c40e/recording.wav",
+  "created_at": "2025-11-25T20:54:54.745931",
+  "user_stories_count": 3,
+  "themes": [
+    "Introduction nom",
+    "Objectif",
+    "Problème actuel"
+  ],
+  "quality": {
+    "confidence": 0.8,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.9
+  },
+  "user_stories": [
+    {
+      "theme": "Problème actuel",
+      "idea": "Développer un système de gestion de dates de livraison plus fiable et transparent pour les clients",
+      "title": "Gestion de dates de livraison en temps réel",
+      "why": "Réduire les décalages de dates et améliorer la satisfaction client",
+      "confidence": 0.8,
+      "summary": "Avoir accès à un système de gestion de dates de livraison en temps réel",
+      "user_story": "En tant que client, je veux avoir accès à un système de gestion de dates de livraison en temps réel afin de mieux planifier mes commandes et mes attentes.",
+      "acceptance_criteria": [
+        "Le système doit être capable de fournir des mises à jour automatiques sur l'état de la livraison au moins deux fois par jour.",
+        "Les clients doivent pouvoir consulter facilement leurs dates de livraison prévues et réelles via un portail en ligne dédié.",
+        "Le système doit envoyer des notifications par courriel ou SMS aux clients en cas de retard ou de changement dans la date de livraison.",
+        "Le système doit être intégré à la plateforme de gestion des commandes existante pour garantir la cohérence des données.",
+        "Le taux d'exactitude des dates de livraison prévues doit être supérieur à 95% après la mise en œuvre du système."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 3.5
+    },
+    {
+      "theme": "Introduction nom",
+      "idea": "Développer un nouveau modèle opératif pour TechRequest",
+      "title": "Modèle opératif amélioré pour lexploitation de TechRequest",
+      "why": "Améliorer les processus et les opérations de TechRequest",
+      "confidence": 0.8,
+      "summary": "Développer un nouveau modèle opératif",
+      "user_story": "En tant que responsable de l'exploitation de TechRequest, je veux développer un nouveau modèle opératif afin d'améliorer l'efficacité et la réactivité de nos processus internes.",
+      "acceptance_criteria": [
+        "Le nouveau modèle opératif doit réduire le temps de traitement des requêtes de 30% par rapport au modèle actuel.",
+        "Le modèle doit être capable de gérer au moins 20% d'augmentation du volume de requêtes sans impact sur la qualité du service.",
+        "Le taux de satisfaction des utilisateurs doit augmenter de 25% après la mise en place du nouveau modèle opératif, mesuré à travers des enquêtes régulières.",
+        "Le nouveau modèle opératif doit être entièrement documenté et accessible à tous les membres de l'équipe pour faciliter la formation et l'adoption.",
+        "Les coûts opérationnels doivent être réduits de 15% grâce à l'optimisation des processus et à l'automatisation des tâches répétitives."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    },
+    {
+      "theme": "Objectif",
+      "idea": "Améliorer les processus existants",
+      "title": "Amélioration de lefficacité des processus existants",
+      "why": "Pour accroître l'efficacité et la productivité",
+      "confidence": 0.8,
+      "summary": "Améliorer les processus existants",
+      "user_story": "En tant que responsable de processus, je veux améliorer les processus existants afin de réduire les délais de traitement et d'augmenter l'efficacité globale.",
+      "acceptance_criteria": [
+        "Le temps de traitement des tâches est réduit d'au moins 20% par rapport aux processus actuels.",
+        "Le nombre d'erreurs humaines est diminué de 15% grâce à l'automatisation de certaines étapes.",
+        "Les indicateurs de performance clés (KPI) sont mis à jour en temps réel pour permettre une prise de décision éclairée."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Gestion de dates de livraison en temps réel",
+      "priority": "Moyenne",
+      "theme": "Problème actuel"
+    },
+    {
+      "title": "Modèle opératif amélioré pour lexploitation de TechRequest",
+      "priority": "Moyenne",
+      "theme": "Introduction nom"
+    },
+    {
+      "title": "Amélioration de lefficacité des processus existants",
+      "priority": "Moyenne",
+      "theme": "Objectif"
+    }
+  ],
+  "consulting_summary": {
+    "transcription": "Aujourd'hui on est là pour parler de New Operative Model qui est une évolution qu'on va apporter à TechRequest TechRequest c'est l'application qui reçoit les requêtes clients de la part d'Airbus pour Airbus pardon donc les requêtes sont traitées par un customer support qui va d'abord prendre en charge la requête ensuite il va avant d'apporter une réponse à la date à laquelle il pourra solutionner le problème du client il va devoir voir le bureau d'études et pour ça il a un tableau où on peut voir un peu leur charge afin d'établir la meilleure date qui compte aujourd'hui ce qu'on vit c'est que ces mêmes customer support donnent une date et par la suite décalent la date à chaque fois ce qui nuit fortement à l'image de Airbus et aussi au client qui est déçu et ne comprend pas donc on aimerait améliorer tout ça",
+    "user_stories": [
+      {
+        "theme": "Problème actuel",
+        "idea": "Développer un système de gestion de dates de livraison plus fiable et transparent pour les clients",
+        "title": "Gestion de dates de livraison en temps réel",
+        "why": "Réduire les décalages de dates et améliorer la satisfaction client",
+        "confidence": 0.8,
+        "summary": "Avoir accès à un système de gestion de dates de livraison en temps réel",
+        "user_story": "En tant que client, je veux avoir accès à un système de gestion de dates de livraison en temps réel afin de mieux planifier mes commandes et mes attentes.",
+        "acceptance_criteria": [
+          "Le système doit être capable de fournir des mises à jour automatiques sur l'état de la livraison au moins deux fois par jour.",
+          "Les clients doivent pouvoir consulter facilement leurs dates de livraison prévues et réelles via un portail en ligne dédié.",
+          "Le système doit envoyer des notifications par courriel ou SMS aux clients en cas de retard ou de changement dans la date de livraison.",
+          "Le système doit être intégré à la plateforme de gestion des commandes existante pour garantir la cohérence des données.",
+          "Le taux d'exactitude des dates de livraison prévues doit être supérieur à 95% après la mise en œuvre du système."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 3.5
+      },
+      {
+        "theme": "Introduction nom",
+        "idea": "Développer un nouveau modèle opératif pour TechRequest",
+        "title": "Modèle opératif amélioré pour lexploitation de TechRequest",
+        "why": "Améliorer les processus et les opérations de TechRequest",
+        "confidence": 0.8,
+        "summary": "Développer un nouveau modèle opératif",
+        "user_story": "En tant que responsable de l'exploitation de TechRequest, je veux développer un nouveau modèle opératif afin d'améliorer l'efficacité et la réactivité de nos processus internes.",
+        "acceptance_criteria": [
+          "Le nouveau modèle opératif doit réduire le temps de traitement des requêtes de 30% par rapport au modèle actuel.",
+          "Le modèle doit être capable de gérer au moins 20% d'augmentation du volume de requêtes sans impact sur la qualité du service.",
+          "Le taux de satisfaction des utilisateurs doit augmenter de 25% après la mise en place du nouveau modèle opératif, mesuré à travers des enquêtes régulières.",
+          "Le nouveau modèle opératif doit être entièrement documenté et accessible à tous les membres de l'équipe pour faciliter la formation et l'adoption.",
+          "Les coûts opérationnels doivent être réduits de 15% grâce à l'optimisation des processus et à l'automatisation des tâches répétitives."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      },
+      {
+        "theme": "Objectif",
+        "idea": "Améliorer les processus existants",
+        "title": "Amélioration de lefficacité des processus existants",
+        "why": "Pour accroître l'efficacité et la productivité",
+        "confidence": 0.8,
+        "summary": "Améliorer les processus existants",
+        "user_story": "En tant que responsable de processus, je veux améliorer les processus existants afin de réduire les délais de traitement et d'augmenter l'efficacité globale.",
+        "acceptance_criteria": [
+          "Le temps de traitement des tâches est réduit d'au moins 20% par rapport aux processus actuels.",
+          "Le nombre d'erreurs humaines est diminué de 15% grâce à l'automatisation de certaines étapes.",
+          "Les indicateurs de performance clés (KPI) sont mis à jour en temps réel pour permettre une prise de décision éclairée."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      }
+    ],
+    "segments": [
+      {
+        "theme": "Introduction NOM",
+        "content": "Aujourd'hui on est là pour parler de New Operative Model qui est une évolution qu'on va apporter à TechRequest"
+      },
+      {
+        "theme": "TechRequest",
+        "content": "TechRequest c'est l'application qui reçoit les requêtes clients de la part d'Airbus pour Airbus pardon donc les requêtes sont traitées par un customer support"
+      },
+      {
+        "theme": "Processus actuel",
+        "content": "qui va d'abord prendre en charge la requête ensuite il va avant d'apporter une réponse à la date à laquelle il pourra solutionner le problème du client il va devoir voir le bureau d'études et pour ça il a un tableau où on peut voir un peu leur charge afin d'établir la meilleure date"
+      },
+      {
+        "theme": "Problème actuel",
+        "content": "ce qu'on vit c'est que ces mêmes customer support donnent une date et par la suite décalent la date à chaque fois ce qui nuit fortement à l'image de Airbus et aussi au client qui est déçu et ne comprend pas"
+      },
+      {
+        "theme": "Objectif",
+        "content": "donc on aimerait améliorer tout ça"
+      }
+    ],
+    "quality": {
+      "confidence": 0.8,
+      "diversity": 1.0,
+      "pertinence": 1.0,
+      "global_score": 0.9
+    },
+    "meeting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    },
+    "consulting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    }
+  }
+}

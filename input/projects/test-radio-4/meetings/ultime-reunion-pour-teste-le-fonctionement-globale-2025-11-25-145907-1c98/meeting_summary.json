@@ -1,0 +1,114 @@
+{
+  "meeting_id": "meeting_2025-11-25_145907_1c98",
+  "audio_path": "input/projects/test-radio-4/meetings/ultime-reunion-pour-teste-le-fonctionement-globale-2025-11-25-145907-1c98/recording.wav",
+  "created_at": "2025-11-25T15:00:02.473153",
+  "user_stories_count": 4,
+  "themes": [
+    "Filtrer projet",
+    "Loader pour attendre",
+    "Notification automatique",
+    "Optimiser dashboard"
+  ],
+  "quality": {
+    "confidence": 0.83,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.91
+  },
+  "user_stories": [
+    {
+      "theme": "Optimiser dashboard",
+      "idea": "Développer une fonctionnalité de personnalisation du dashboard",
+      "title": "Personnalisation du dashboard avec widgets et indicateurs de performance. \n\nOu de manière plus concise : \nPersonnalisation du dashboard \n\nCela résume lobjectif principal de la User Story de manière claire et concise.",
+      "why": "Pour améliorer l'expérience utilisateur et la productivité",
+      "confidence": 0.8,
+      "summary": "Personnaliser mon dashboard avec des widgets et des indicateurs de performance clés",
+      "user_story": "En tant qu'utilisateur du système, je veux personnaliser mon dashboard avec des widgets et des indicateurs de performance clés afin de mieux gérer mes tâches et mes projets.",
+      "acceptance_criteria": [
+        "L'utilisateur peut ajouter ou supprimer des widgets du dashboard en fonction de ses besoins.",
+        "L'utilisateur peut personnaliser l'ordre d'affichage des widgets sur son dashboard.",
+        "L'utilisateur peut configurer les paramètres de mise à jour automatique des données affichées sur les widgets.",
+        "L'utilisateur reçoit une notification lorsqu'un widget est ajouté ou supprimé avec succès.",
+        "L'utilisateur peut sauvegarder et restaurer ses paramètres de personnalisation du dashboard."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Loader pour attendre",
+      "idea": "Ajouter un loader ou un indicateur de chargement pour les utilisateurs",
+      "title": "Indicateur de chargement pour les pages et fonctionnalités.",
+      "why": "Réduire la frustration et améliorer la satisfaction des utilisateurs en leur fournissant une indication de chargement",
+      "confidence": 0.8,
+      "summary": "Voir un indicateur de chargement lors de l'attente de chargement d'une page ou d'une fonctionnalité",
+      "user_story": "En tant qu'utilisateur, je veux voir un indicateur de chargement lors de l'attente de chargement d'une page ou d'une fonctionnalité afin de mieux comprendre l'état de progression et de réduire l'incertitude.",
+      "acceptance_criteria": [
+        "L'indicateur de chargement doit apparaître dans un délai de 1 seconde après le déclenchement de l'action de chargement.",
+        "L'indicateur de chargement doit être visible et clairement identifiable pour les utilisateurs, y compris ceux ayant des déficiences visuelles.",
+        "L'indicateur de chargement doit disparaître automatiquement une fois que le chargement est terminé, avec un délai de 0,5 seconde maximum.",
+        "L'indicateur de chargement doit être cohérent dans son design et son comportement sur toutes les pages et fonctionnalités du site."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Notification automatique",
+      "idea": "Développer une fonctionnalité de notification automatique pour les résumés",
+      "title": "Notification automatique de résumés",
+      "why": "Pour informer les utilisateurs de manière proactive lorsque leur résumé est prêt, améliorant ainsi leur expérience utilisateur et réduisant les temps d'attente",
+      "confidence": 0.9,
+      "summary": "Développer une fonctionnalité de notification automatique pour les résumés",
+      "user_story": "En tant que responsable de projet, je veux développer une fonctionnalité de notification automatique pour les résumés afin de garantir que les membres de l'équipe soient informés en temps réel des mises à jour importantes.",
+      "acceptance_criteria": [
+        "Le système envoie une notification automatique aux membres de l'équipe lorsqu'un nouveau résumé est ajouté ou mis à jour.",
+        "Les notifications incluent les détails clés du résumé, tels que le titre, la date et l'auteur.",
+        "Les utilisateurs peuvent personnaliser leurs préférences de notification pour recevoir uniquement les informations qui les concernent.",
+        "Le système conserve un historique des notifications envoyées pour permettre un suivi et une analyse."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.0
+    },
+    {
+      "theme": "Filtrer projet",
+      "idea": "Ajouter des filtres de recherche avancés sur la page projet",
+      "title": "Filtres de recherche avancés sur projet",
+      "why": "Les utilisateurs ont du mal à trouver les informations dont ils ont besoin sur la page projet",
+      "confidence": 0.8,
+      "summary": "Avoir accès à des filtres de recherche avancés sur la page projet",
+      "user_story": "En tant que responsable de projet, je veux avoir accès à des filtres de recherche avancés sur la page projet afin de trouver rapidement les informations spécifiques dont j'ai besoin pour prendre des décisions éclairées.",
+      "acceptance_criteria": [
+        "Le système permet aux utilisateurs de filtrer les projets par nom, date de création, statut et responsable.",
+        "Les filtres de recherche sont accessibles directement depuis la page projet et peuvent être appliqués en un seul clic.",
+        "Les résultats de la recherche sont affichés dans un tableau avec les informations clés pour chaque projet, telles que le nom, la date de début, la date de fin et le statut.",
+        "Les utilisateurs peuvent enregistrer leurs filtres de recherche préférés pour un accès rapide ultérieur.",
+        "Le système prend en charge une fonction de recherche texte libre pour permettre aux utilisateurs de rechercher des projets en fonction de mots-clés spécifiques."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Personnalisation du dashboard avec widgets et indicateurs de performance. \n\nOu de manière plus concise : \nPersonnalisation du dashboard \n\nCela résume lobjectif principal de la User Story de manière claire et concise.",
+      "priority": "Moyenne",
+      "theme": "Optimiser dashboard"
+    },
+    {
+      "title": "Indicateur de chargement pour les pages et fonctionnalités.",
+      "priority": "Moyenne",
+      "theme": "Loader pour attendre"
+    },
+    {
+      "title": "Notification automatique de résumés",
+      "priority": "Moyenne",
+      "theme": "Notification automatique"
+    }
+  ]
+}

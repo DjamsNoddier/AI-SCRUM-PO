@@ -1,0 +1,56 @@
+{
+    "meeting_id": "meeting_2025-01-18_143000_ab12",
+    "audio_path": "input/meetings/meeting_2025-01-18_143000_ab12/recording.wav",
+    "user_stories_count": 5,
+    "themes": [
+      "Architecture",
+      "Sécurité",
+      "User Experience",
+      "Tech Debt"
+    ],
+    "summary": {
+      "context": "Le meeting visait à clarifier la roadmap du trimestre, organiser la dette technique et valider les règles fonctionnelles des notifications en temps réel.",
+      "key_points": [
+        "Validation architecture SMPID + SMB24",
+        "Chiffrement PAN via SMSEC obligatoire",
+        "Notification Kafka en temps réel",
+        "Problème de volumétrie : risque saturation Kafka"
+      ],
+      "decisions": [
+        "Adoption du format PaymentCardOppositionAcknowledged",
+        "Gestion multi-canal SmartInfo + SMB24",
+        "Logs normalisés dans LOGS-SMPID"
+      ],
+      "risks": [
+        "Incohérence entre les démons → risque régression",
+        "Specs trop longues → retard Agile",
+        "Dépendance SMSEC → temps réponse inconnu"
+      ],
+      "next_steps": [
+        "Créer les US non passantes (rejets)",
+        "Documenter le flow SMPID → SMSEC",
+        "Créer dashboard des oppositions"
+      ]
+    },
+    "user_stories": [
+      {
+        "id": "US001",
+        "title": "En tant que SMPID, je dois chiffrer le PAN via SMSEC",
+        "priority": "high",
+        "theme": "Sécurité"
+      },
+      {
+        "id": "US002",
+        "title": "En tant que système, je dois notifier le SID via Kafka",
+        "priority": "high",
+        "theme": "Architecture"
+      },
+      {
+        "id": "US003",
+        "title": "En tant qu’analyste, je veux historiser les événements",
+        "priority": "medium",
+        "theme": "Tech Debt"
+      }
+    ]
+  }
+  

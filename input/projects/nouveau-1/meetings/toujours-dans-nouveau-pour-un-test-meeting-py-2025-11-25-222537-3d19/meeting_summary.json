@@ -1,0 +1,31 @@
+{
+  "meeting_id": "meeting_2025-11-25_222537_3d19",
+  "audio_path": "input/projects/nouveau-1/meetings/toujours-dans-nouveau-pour-un-test-meeting-py-2025-11-25-222537-3d19/recording.wav",
+  "created_at": "2025-11-25T22:27:09.685216",
+  "user_stories": [],
+  "user_stories_count": 0,
+  "themes": [],
+  "quality": {
+    "confidence": 0,
+    "diversity": 0,
+    "pertinence": 0,
+    "global_score": 0
+  },
+  "sections": {
+    "context": "Réunion de clôture ou de fin de projet, avec des remerciements",
+    "key_points": [
+      "Expression de gratitude"
+    ],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [],
+  "consulting_summary": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  }
+}

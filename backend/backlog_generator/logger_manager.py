@@ -8,6 +8,7 @@ Chaque module (listener, transcriber, API...) peut l’utiliser.
 import os
 import json
 import datetime
+import inspect
 from pathlib import Path
 
 LOG_DIR = Path("logs/structured_logs")
@@ -23,14 +24,31 @@ def _serialize(obj):
     return str(obj)
 
 
+def _detect_module_name():
+    """
+    Détecte automatiquement le nom du module appelant (ex: 'api.meetings' ou 'backlog_generator.audio_transcriber').
+    Cela permet de tracer la provenance du log sans le préciser à chaque appel.
+    """
+    try:
+        frame = inspect.stack()[2]
+        module = inspect.getmodule(frame[0])
+        if module and module.__name__:
+            return module.__name__
+    except Exception:
+        pass
+    return "unknown"
+
+
 def log_event(level: str, message: str, **kwargs):
     """
     Écrit un log structuré JSON dans le fichier du jour.
-    Exemple : log_event("INFO", "Session démarrée", session_id="2025-11-11_0006")
+    Exemple :
+        log_event("INFO", "Session démarrée", session_id="2025-11-11_0006")
     """
     log_entry = {
         "timestamp": datetime.datetime.now().isoformat(),
         "level": level.upper(),
+        "module": _detect_module_name(),
         "message": message,
         **kwargs
     }
@@ -41,7 +59,7 @@ def log_event(level: str, message: str, **kwargs):
         f.write(json.dumps(log_entry, default=_serialize) + "\n")
 
     # Affichage console (pour le dev)
-    print(f"[{log_entry['level']}] {log_entry['timestamp']} → {message}")
+    print(f"[{log_entry['level']}] {log_entry['timestamp']} | {log_entry['module']} → {message}")
 
 
 # Helpers

@@ -1,0 +1,192 @@
+{
+  "meeting_id": "meeting_2025-11-25_215811_3ec3",
+  "audio_path": "input/projects/nouveau-1/meetings/ce-ci-et-un-test-2025-11-25-215811-3ec3/recording.wav",
+  "created_at": "2025-11-25T21:59:15.069751",
+  "user_stories_count": 3,
+  "themes": [
+    "Alerte environnementale",
+    "Solutions de suivi",
+    "Validation de livraison"
+  ],
+  "quality": {
+    "confidence": 0.8,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.9
+  },
+  "user_stories": [
+    {
+      "theme": "Alerte environnementale",
+      "idea": "Développer une solution de sécurité pour résoudre les problèmes actuels",
+      "title": "Détection et prévention de menaces en temps réel",
+      "why": "Régler les problèmes de sécurité pour protéger les utilisateurs et les données",
+      "confidence": 0.8,
+      "summary": "Développer une solution de sécurité intégrée pour détecter et prévenir les menaces en temps réel",
+      "user_story": "En tant que responsable de la sécurité de l'information, je veux développer une solution de sécurité intégrée pour détecter et prévenir les menaces en temps réel afin de protéger les données sensibles de l'entreprise.",
+      "acceptance_criteria": [
+        "La solution doit être capable de détecter au moins 95% des menaces connues et inconnues.",
+        "Le système doit pouvoir alerter les équipes de sécurité dans les 5 minutes suivant la détection d'une menace.",
+        "La solution doit être compatible avec les systèmes d'exploitation existants de l'entreprise, y compris Windows, Linux et macOS.",
+        "Le temps de réponse moyen pour résoudre une alerte de sécurité doit être inférieur à 30 minutes."
+      ],
+      "priority": "Haute",
+      "relevance_score": 3.5
+    },
+    {
+      "theme": "Solutions de suivi",
+      "idea": "Développer une fonctionnalité de traçage et de géolocalisation pour les colis en cours de livraison",
+      "title": "Suivi en temps réel des colis en livraison",
+      "why": "Améliorer la sécurité et la transparence pour les utilisateurs lors du pick-up",
+      "confidence": 0.8,
+      "summary": "Pouvoir suivre en temps réel la localisation des colis en cours de livraison",
+      "user_story": "En tant que responsable logistique, je veux pouvoir suivre en temps réel la localisation des colis en cours de livraison afin de mieux gérer les délais de livraison et améliorer la satisfaction client.",
+      "acceptance_criteria": [
+        "Le système de traçage doit être capable de localiser les colis avec une précision de 100 mètres ou moins.",
+        "Les mises à jour de localisation doivent être effectuées en temps réel, avec une fréquence d'au moins une fois par minute.",
+        "Le système doit être capable de fournir des notifications automatiques aux clients lorsque leur colis est en approche de livraison, avec un préavis d'au moins 30 minutes.",
+        "Le système doit être accessible via une application mobile et un site web, avec une interface utilisateur intuitive et facile à utiliser."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 3.0
+    },
+    {
+      "theme": "Validation de livraison",
+      "idea": "Système de notification de livraison",
+      "title": "Notifications de livraison en temps réel",
+      "why": "Permettre au destinataire de confirmer la réception de son colis et au expéditeur de recevoir une notification de livraison réussie",
+      "confidence": 0.8,
+      "summary": "Recevoir des notifications en temps réel lorsque les colis sont livrés",
+      "user_story": "En tant que gestionnaire de logistique, je veux recevoir des notifications en temps réel lorsque les colis sont livrés afin de mieux suivre les livraisons et améliorer la satisfaction client.",
+      "acceptance_criteria": [
+        "Le système envoie une notification au gestionnaire de logistique dans les 5 minutes suivant la livraison d'un colis.",
+        "Les notifications incluent les détails de livraison, tels que le numéro de suivi, l'adresse de livraison et l'heure de livraison.",
+        "Le système permet au gestionnaire de logistique de consulter l'historique des notifications de livraison pour les 30 derniers jours.",
+        "Les notifications sont envoyées via courriel et via l'application mobile de gestion de logistique."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 3.0
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Détection et prévention de menaces en temps réel",
+      "priority": "Haute",
+      "theme": "Alerte environnementale"
+    },
+    {
+      "title": "Suivi en temps réel des colis en livraison",
+      "priority": "Moyenne",
+      "theme": "Solutions de suivi"
+    },
+    {
+      "title": "Notifications de livraison en temps réel",
+      "priority": "Moyenne",
+      "theme": "Validation de livraison"
+    }
+  ],
+  "consulting_summary": {
+    "transcription": "Le projet Nodger consiste à permettre à un utilisateur qui voyage de proposer une partie de son coffre ou de son bagage pour transporter le colis d'un expéditeur qui a envie d'envoyer un colis vers la même destination que celui qui voyage. Pour cela, on a mis en place une plateforme de crowdshipping. Par contre, il reste des problèmes de sécurité à régler. Et donc, on aimerait avoir des idées, des solutions pour pouvoir régler ce problème de sécurité, de comment faire en sorte pour qu'au pick-up, lorsque l'utilisateur récupère le colis de l'expéditeur, il puisse le suivre, traquer, géolocaliser, et qu'à la fin, il puisse recevoir une notif ou quelque chose qui valide la bonne livraison du colis à la personne destinataire. Donc voilà, essayez d'imaginer avec moi un système pareil.",
+    "user_stories": [
+      {
+        "theme": "Alerte environnementale",
+        "idea": "Développer une solution de sécurité pour résoudre les problèmes actuels",
+        "title": "Détection et prévention de menaces en temps réel",
+        "why": "Régler les problèmes de sécurité pour protéger les utilisateurs et les données",
+        "confidence": 0.8,
+        "summary": "Développer une solution de sécurité intégrée pour détecter et prévenir les menaces en temps réel",
+        "user_story": "En tant que responsable de la sécurité de l'information, je veux développer une solution de sécurité intégrée pour détecter et prévenir les menaces en temps réel afin de protéger les données sensibles de l'entreprise.",
+        "acceptance_criteria": [
+          "La solution doit être capable de détecter au moins 95% des menaces connues et inconnues.",
+          "Le système doit pouvoir alerter les équipes de sécurité dans les 5 minutes suivant la détection d'une menace.",
+          "La solution doit être compatible avec les systèmes d'exploitation existants de l'entreprise, y compris Windows, Linux et macOS.",
+          "Le temps de réponse moyen pour résoudre une alerte de sécurité doit être inférieur à 30 minutes."
+        ],
+        "priority": "Haute",
+        "relevance_score": 3.5
+      },
+      {
+        "theme": "Solutions de suivi",
+        "idea": "Développer une fonctionnalité de traçage et de géolocalisation pour les colis en cours de livraison",
+        "title": "Suivi en temps réel des colis en livraison",
+        "why": "Améliorer la sécurité et la transparence pour les utilisateurs lors du pick-up",
+        "confidence": 0.8,
+        "summary": "Pouvoir suivre en temps réel la localisation des colis en cours de livraison",
+        "user_story": "En tant que responsable logistique, je veux pouvoir suivre en temps réel la localisation des colis en cours de livraison afin de mieux gérer les délais de livraison et améliorer la satisfaction client.",
+        "acceptance_criteria": [
+          "Le système de traçage doit être capable de localiser les colis avec une précision de 100 mètres ou moins.",
+          "Les mises à jour de localisation doivent être effectuées en temps réel, avec une fréquence d'au moins une fois par minute.",
+          "Le système doit être capable de fournir des notifications automatiques aux clients lorsque leur colis est en approche de livraison, avec un préavis d'au moins 30 minutes.",
+          "Le système doit être accessible via une application mobile et un site web, avec une interface utilisateur intuitive et facile à utiliser."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 3.0
+      },
+      {
+        "theme": "Validation de livraison",
+        "idea": "Système de notification de livraison",
+        "title": "Notifications de livraison en temps réel",
+        "why": "Permettre au destinataire de confirmer la réception de son colis et au expéditeur de recevoir une notification de livraison réussie",
+        "confidence": 0.8,
+        "summary": "Recevoir des notifications en temps réel lorsque les colis sont livrés",
+        "user_story": "En tant que gestionnaire de logistique, je veux recevoir des notifications en temps réel lorsque les colis sont livrés afin de mieux suivre les livraisons et améliorer la satisfaction client.",
+        "acceptance_criteria": [
+          "Le système envoie une notification au gestionnaire de logistique dans les 5 minutes suivant la livraison d'un colis.",
+          "Les notifications incluent les détails de livraison, tels que le numéro de suivi, l'adresse de livraison et l'heure de livraison.",
+          "Le système permet au gestionnaire de logistique de consulter l'historique des notifications de livraison pour les 30 derniers jours.",
+          "Les notifications sont envoyées via courriel et via l'application mobile de gestion de logistique."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 3.0
+      }
+    ],
+    "segments": [
+      {
+        "theme": "Présentation du projet",
+        "content": "Le projet Nodger consiste à permettre à un utilisateur qui voyage de proposer une partie de son coffre ou de son bagage pour transporter le colis d'un expéditeur qui a envie d'envoyer un colis vers la même destination que celui qui voyage."
+      },
+      {
+        "theme": "Plateforme de crowdshipping",
+        "content": "Pour cela, on a mis en place une plateforme de crowdshipping."
+      },
+      {
+        "theme": "Problèmes de sécurité",
+        "content": "Par contre, il reste des problèmes de sécurité à régler."
+      },
+      {
+        "theme": "Solutions de suivi",
+        "content": "Et donc, on aimerait avoir des idées, des solutions pour pouvoir régler ce problème de sécurité, de comment faire en sorte pour qu'au pick-up, lorsque l'utilisateur récupère le colis de l'expéditeur, il puisse le suivre, traquer, géolocaliser,"
+      },
+      {
+        "theme": "Validation de livraison",
+        "content": "et qu'à la fin, il puisse recevoir une notif ou quelque chose qui valide la bonne livraison du colis à la personne destinataire."
+      }
+    ],
+    "quality": {
+      "confidence": 0.8,
+      "diversity": 1.0,
+      "pertinence": 1.0,
+      "global_score": 0.9
+    },
+    "meeting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    },
+    "consulting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    }
+  }
+}

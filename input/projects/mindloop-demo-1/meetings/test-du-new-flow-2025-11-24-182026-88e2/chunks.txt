@@ -1,0 +1,2 @@
+file '/Users/djamil/Documents/ai_scrum_po/input/meetings/meeting_2025-11-24_182026_88e2/chunks/chunk_001.wav'
+file '/Users/djamil/Documents/ai_scrum_po/input/meetings/meeting_2025-11-24_182026_88e2/chunks/chunk_002.wav'

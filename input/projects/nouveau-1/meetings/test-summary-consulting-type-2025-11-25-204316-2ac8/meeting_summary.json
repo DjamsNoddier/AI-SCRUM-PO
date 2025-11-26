@@ -1,0 +1,220 @@
+{
+  "meeting_id": "meeting_2025-11-25_204316_2ac8",
+  "audio_path": "input/projects/nouveau-1/meetings/test-summary-consulting-type-2025-11-25-204316-2ac8/recording.wav",
+  "created_at": "2025-11-25T20:43:48.874038",
+  "user_stories_count": 4,
+  "themes": [
+    "Expérience utilisateur",
+    "Problème de navigation",
+    "Solution souhaitée"
+  ],
+  "quality": {
+    "confidence": 0.78,
+    "diversity": 0.75,
+    "pertinence": 1.0,
+    "global_score": 0.81
+  },
+  "user_stories": [
+    {
+      "theme": "Problème de navigation",
+      "idea": "Améliorer la visibilité et l'accès aux filtres",
+      "title": "Filtres personnalisables pour recherches avancées",
+      "why": "Les utilisateurs ont du mal à trouver les filtres, ce qui suggère un problème d'ergonomie ou de conception de l'interface utilisateur",
+      "confidence": 0.8,
+      "summary": "Avoir accès à des filtres personnalisables et facilement accessibles",
+      "user_story": "En tant qu'utilisateur avancé, je veux avoir accès à des filtres personnalisables et facilement accessibles afin de pouvoir affiner rapidement mes recherches et obtenir des résultats pertinents.",
+      "acceptance_criteria": [
+        "Les filtres sont accessibles directement depuis la page d'accueil de la recherche.",
+        "Les utilisateurs peuvent enregistrer et réutiliser leurs filtres personnalisés.",
+        "Le système propose des suggestions de filtres en fonction des recherches précédentes de l'utilisateur.",
+        "Les filtres sont clairement étiquetés et classés par catégorie pour une meilleure compréhension."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Expérience utilisateur",
+      "idea": "Développer une plateforme d'analyse de données intuitive et personnalisable",
+      "title": "Plateforme danalyse de données intuitive",
+      "why": "Pour répondre aux besoins des utilisateurs et améliorer leur compréhension des données",
+      "confidence": 0.8,
+      "summary": "Avoir accès à une plateforme d'analyse de données intuitive et personnalisable",
+      "user_story": "En tant qu'analyste de données, je veux avoir accès à une plateforme d'analyse de données intuitive et personnalisable afin de pouvoir prendre des décisions éclairées de manière efficace.",
+      "acceptance_criteria": [
+        "La plateforme doit permettre une personnalisation de l'interface utilisateur en fonction des besoins spécifiques de l'analyste.",
+        "La plateforme doit être capable de traiter et d'analyser des données provenant de sources variées, y compris des bases de données relationnelles et des fichiers CSV.",
+        "La plateforme doit fournir des outils de visualisation de données interactifs pour faciliter la compréhension des résultats d'analyse.",
+        "La plateforme doit être accessible via un navigateur web et être compatible avec les principaux systèmes d'exploitation.",
+        "La plateforme doit offrir une documentation complète et des ressources de formation pour aider les utilisateurs à se familiariser avec ses fonctionnalités."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    },
+    {
+      "theme": "Problème de navigation",
+      "idea": "Simplifier les décisions en les rendant plus explicites",
+      "title": "Outil de prise de décision éclairée",
+      "why": "Les utilisateurs ont du mal à prendre des décisions, ce qui suggère un manque d'information ou de guidage dans le processus de décision",
+      "confidence": 0.7,
+      "summary": "Avoir accès à un outil de prise de décision qui affiche clairement les options et leurs conséquences",
+      "user_story": "En tant que décideur, je veux avoir accès à un outil de prise de décision qui affiche clairement les options et leurs conséquences afin de réduire l'incertitude et améliorer la qualité de mes choix.",
+      "acceptance_criteria": [
+        "L'outil de prise de décision doit être capable de présenter au moins trois options pour chaque décision, avec leurs avantages et inconvénients respectifs.",
+        "L'outil doit fournir une évaluation quantitative des risques et des bénéfices potentiels associés à chaque option.",
+        "Le système doit permettre aux utilisateurs de sauvegarder et de consulter l'historique de leurs décisions, y compris les options retenues et les résultats obtenus."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    },
+    {
+      "theme": "Solution souhaitée",
+      "idea": "Créer une fonctionnalité de review global",
+      "title": "Review global de contenu pour amélioration de qualité",
+      "why": "Pour permettre aux utilisateurs de visualiser l'ensemble des informations dans un seul endroit",
+      "confidence": 0.8,
+      "summary": "Avoir une fonctionnalité de review global",
+      "user_story": "En tant que gestionnaire de contenu, je veux avoir une fonctionnalité de review global afin de pouvoir évaluer et améliorer la qualité globale de nos contenus de manière efficace.",
+      "acceptance_criteria": [
+        "Le système permet aux utilisateurs de laisser des commentaires et des notes sur les contenus.",
+        "Les reviews sont affichées de manière claire et organisée pour faciliter la lecture et la compréhension.",
+        "Le système calcule et affiche une note moyenne globale pour chaque contenu basée sur les reviews.",
+        "Les utilisateurs peuvent filtrer les contenus par note ou par date de review.",
+        "Le système envoie des notifications aux créateurs de contenu lorsqu’une nouvelle review est publiée."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Filtres personnalisables pour recherches avancées",
+      "priority": "Moyenne",
+      "theme": "Problème de navigation"
+    },
+    {
+      "title": "Plateforme danalyse de données intuitive",
+      "priority": "Moyenne",
+      "theme": "Expérience utilisateur"
+    },
+    {
+      "title": "Outil de prise de décision éclairée",
+      "priority": "Moyenne",
+      "theme": "Problème de navigation"
+    }
+  ],
+  "consulting_summary": {
+    "transcription": "Nous devons améliorer l'expérience utilisateur Insight. Les utilisateurs ne trouvent pas les filtres et les décisions. Cela doit afficher tout dans un review. C'est tout. Adama K.",
+    "user_stories": [
+      {
+        "theme": "Problème de navigation",
+        "idea": "Améliorer la visibilité et l'accès aux filtres",
+        "title": "Filtres personnalisables pour recherches avancées",
+        "why": "Les utilisateurs ont du mal à trouver les filtres, ce qui suggère un problème d'ergonomie ou de conception de l'interface utilisateur",
+        "confidence": 0.8,
+        "summary": "Avoir accès à des filtres personnalisables et facilement accessibles",
+        "user_story": "En tant qu'utilisateur avancé, je veux avoir accès à des filtres personnalisables et facilement accessibles afin de pouvoir affiner rapidement mes recherches et obtenir des résultats pertinents.",
+        "acceptance_criteria": [
+          "Les filtres sont accessibles directement depuis la page d'accueil de la recherche.",
+          "Les utilisateurs peuvent enregistrer et réutiliser leurs filtres personnalisés.",
+          "Le système propose des suggestions de filtres en fonction des recherches précédentes de l'utilisateur.",
+          "Les filtres sont clairement étiquetés et classés par catégorie pour une meilleure compréhension."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 2.5
+      },
+      {
+        "theme": "Expérience utilisateur",
+        "idea": "Développer une plateforme d'analyse de données intuitive et personnalisable",
+        "title": "Plateforme danalyse de données intuitive",
+        "why": "Pour répondre aux besoins des utilisateurs et améliorer leur compréhension des données",
+        "confidence": 0.8,
+        "summary": "Avoir accès à une plateforme d'analyse de données intuitive et personnalisable",
+        "user_story": "En tant qu'analyste de données, je veux avoir accès à une plateforme d'analyse de données intuitive et personnalisable afin de pouvoir prendre des décisions éclairées de manière efficace.",
+        "acceptance_criteria": [
+          "La plateforme doit permettre une personnalisation de l'interface utilisateur en fonction des besoins spécifiques de l'analyste.",
+          "La plateforme doit être capable de traiter et d'analyser des données provenant de sources variées, y compris des bases de données relationnelles et des fichiers CSV.",
+          "La plateforme doit fournir des outils de visualisation de données interactifs pour faciliter la compréhension des résultats d'analyse.",
+          "La plateforme doit être accessible via un navigateur web et être compatible avec les principaux systèmes d'exploitation.",
+          "La plateforme doit offrir une documentation complète et des ressources de formation pour aider les utilisateurs à se familiariser avec ses fonctionnalités."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      },
+      {
+        "theme": "Problème de navigation",
+        "idea": "Simplifier les décisions en les rendant plus explicites",
+        "title": "Outil de prise de décision éclairée",
+        "why": "Les utilisateurs ont du mal à prendre des décisions, ce qui suggère un manque d'information ou de guidage dans le processus de décision",
+        "confidence": 0.7,
+        "summary": "Avoir accès à un outil de prise de décision qui affiche clairement les options et leurs conséquences",
+        "user_story": "En tant que décideur, je veux avoir accès à un outil de prise de décision qui affiche clairement les options et leurs conséquences afin de réduire l'incertitude et améliorer la qualité de mes choix.",
+        "acceptance_criteria": [
+          "L'outil de prise de décision doit être capable de présenter au moins trois options pour chaque décision, avec leurs avantages et inconvénients respectifs.",
+          "L'outil doit fournir une évaluation quantitative des risques et des bénéfices potentiels associés à chaque option.",
+          "Le système doit permettre aux utilisateurs de sauvegarder et de consulter l'historique de leurs décisions, y compris les options retenues et les résultats obtenus."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      },
+      {
+        "theme": "Solution souhaitée",
+        "idea": "Créer une fonctionnalité de review global",
+        "title": "Review global de contenu pour amélioration de qualité",
+        "why": "Pour permettre aux utilisateurs de visualiser l'ensemble des informations dans un seul endroit",
+        "confidence": 0.8,
+        "summary": "Avoir une fonctionnalité de review global",
+        "user_story": "En tant que gestionnaire de contenu, je veux avoir une fonctionnalité de review global afin de pouvoir évaluer et améliorer la qualité globale de nos contenus de manière efficace.",
+        "acceptance_criteria": [
+          "Le système permet aux utilisateurs de laisser des commentaires et des notes sur les contenus.",
+          "Les reviews sont affichées de manière claire et organisée pour faciliter la lecture et la compréhension.",
+          "Le système calcule et affiche une note moyenne globale pour chaque contenu basée sur les reviews.",
+          "Les utilisateurs peuvent filtrer les contenus par note ou par date de review.",
+          "Le système envoie des notifications aux créateurs de contenu lorsqu’une nouvelle review est publiée."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      }
+    ],
+    "segments": [
+      {
+        "theme": "Expérience utilisateur",
+        "content": "Nous devons améliorer l'expérience utilisateur Insight."
+      },
+      {
+        "theme": "Problème de navigation",
+        "content": "Les utilisateurs ne trouvent pas les filtres et les décisions."
+      },
+      {
+        "theme": "Solution souhaitée",
+        "content": "Cela doit afficher tout dans un review."
+      }
+    ],
+    "quality": {
+      "confidence": 0.78,
+      "diversity": 0.75,
+      "pertinence": 1.0,
+      "global_score": 0.81
+    },
+    "meeting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    },
+    "consulting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    }
+  }
+}

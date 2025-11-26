@@ -1,0 +1,229 @@
+{
+  "meeting_id": "meeting_2025-11-25_184559_d248",
+  "audio_path": "input/projects/test-radio-4/meetings/test-dernier-2025-11-25-184559-d248/recording.wav",
+  "created_at": "2025-11-25T18:46:30.998478",
+  "user_stories_count": 4,
+  "themes": [
+    "Epingler projet",
+    "Indicateur qualité",
+    "Notification",
+    "Objectif"
+  ],
+  "quality": {
+    "confidence": 0.88,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.94
+  },
+  "user_stories": [
+    {
+      "theme": "Notification",
+      "idea": "Développer une fonctionnalité de notification automatique pour les résumés IA",
+      "title": "Notification automatique pour résumés IA",
+      "why": "Pour informer les utilisateurs dès que leur résumé IA est prêt, améliorant ainsi l'expérience utilisateur et la productivité",
+      "confidence": 0.9,
+      "summary": "Développer une fonctionnalité de notification automatique pour les résumés ia",
+      "user_story": "En tant que développeur d'applications d'intelligence artificielle, je veux développer une fonctionnalité de notification automatique pour les résumés IA afin de garantir que les utilisateurs soient informés en temps réel des mises à jour et des résultats des analyses.",
+      "acceptance_criteria": [
+        "La fonctionnalité de notification automatique doit être capable d'envoyer des notifications à au moins 100 utilisateurs simultanément sans retard.",
+        "Les notifications doivent contenir un résumé des résultats de l'analyse IA, y compris les principaux points et les recommandations.",
+        "La fonctionnalité doit être intégrée à l'interface utilisateur existante de l'application, avec des options de personnalisation pour les utilisateurs.",
+        "Les notifications doivent être sécurisées et protégées contre les accès non autorisés, avec un système de gestion des permissions pour les utilisateurs.",
+        "La fonctionnalité doit être testée avec succès sur au moins trois plateformes différentes (desktop, mobile, tablette) avant sa mise en production."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 3.0
+    },
+    {
+      "theme": "Objectif",
+      "idea": "Développer de nouvelles fonctionnalités pour le Dashboard Mindloop",
+      "title": "Amélioration du Dashboard Mindloop pour suivre les performances.",
+      "why": "L'objectif est d'améliorer le Dashboard Mindloop, ce qui implique l'ajout de nouvelles fonctionnalités ou l'amélioration des existantes",
+      "confidence": 0.8,
+      "summary": "Développer de nouvelles fonctionnalités pour le dashboard mindloop",
+      "user_story": "En tant que responsable de projet, je veux développer de nouvelles fonctionnalités pour le Dashboard Mindloop afin de mieux suivre et analyser les performances de mon équipe.",
+      "acceptance_criteria": [
+        "Le Dashboard Mindloop doit afficher les indicateurs de performance clés (IPC) en temps réel.",
+        "Les utilisateurs doivent pouvoir personnaliser les tableaux de bord en fonction de leurs besoins spécifiques.",
+        "Le système doit être capable de générer des rapports détaillés sur les performances de l'équipe sur une période donnée.",
+        "Le Dashboard Mindloop doit être accessible sur différents appareils et navigateurs web."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    },
+    {
+      "theme": "Indicateur qualité",
+      "idea": "Développer un indicateur de qualité du meeting",
+      "title": "Indicateur de qualité de réunion pour les organisateurs.",
+      "why": "Pour évaluer efficacement la qualité des réunions et identifier les domaines d'amélioration",
+      "confidence": 0.9,
+      "summary": "Disposer d'un indicateur de qualité du meeting",
+      "user_story": "En tant que organisateur de réunions, je veux disposer d'un indicateur de qualité du meeting afin de mesurer l'efficacité et l'impact de mes réunions sur l'équipe.",
+      "acceptance_criteria": [
+        "L'indicateur de qualité du meeting doit être calculé en fonction de la satisfaction des participants, évaluée à travers un sondage après chaque réunion.",
+        "L'indicateur doit prendre en compte les objectifs fixés avant la réunion et leur réalisation effective.",
+        "L'indicateur doit être présenté sous forme de score ou de notation, facile à comprendre et à interpréter par les organisateurs de réunions.",
+        "L'indicateur doit être mis à jour en temps réel après chaque réunion, pour refléter les résultats les plus récents.",
+        "L'indicateur doit être accessible à tous les organisateurs de réunions, pour favoriser la transparence et l'amélioration continue."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    },
+    {
+      "theme": "Epingler projet",
+      "idea": "Fonctionnalité d'épinglage de projets",
+      "title": "Épingle des projets importants sur le tableau de bord",
+      "why": "Permettre aux utilisateurs de donner la priorité et de suivre facilement les projets les plus importants",
+      "confidence": 0.9,
+      "summary": "Pouvoir épingler des projets importants sur mon tableau de bord",
+      "user_story": "En tant que gestionnaire de projets, je veux pouvoir épingler des projets importants sur mon tableau de bord afin de pouvoir accéder rapidement aux informations clés de ces projets et de suivre leur progression de manière efficace.",
+      "acceptance_criteria": [
+        "L'utilisateur peut épingler un maximum de 5 projets sur son tableau de bord.",
+        "Les projets épinglés apparaissent en haut de la liste des projets avec une icône distincte pour les identifier.",
+        "L'utilisateur reçoit une notification lorsque l'un de ses projets épinglés est mis à jour.",
+        "Les projets épinglés sont accessibles à partir de n'importe quelle page du système.",
+        "L'utilisateur peut supprimer un projet épinglé à tout moment."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Notification automatique pour résumés IA",
+      "priority": "Moyenne",
+      "theme": "Notification"
+    },
+    {
+      "title": "Amélioration du Dashboard Mindloop pour suivre les performances.",
+      "priority": "Moyenne",
+      "theme": "Objectif"
+    },
+    {
+      "title": "Indicateur de qualité de réunion pour les organisateurs.",
+      "priority": "Moyenne",
+      "theme": "Indicateur qualité"
+    }
+  ],
+  "consulting_summary": {
+    "transcription": "Aujourd'hui notre objectif est d'améliorer le Dashboard Mindloop. Première priorité, ajouter un indicateur de qualité du meeting. Deuxième point, permettre aux utilisateurs d'épingler un projet important. Et dernier point, notifier automatiquement quand un résumé IA est prêt.",
+    "user_stories": [
+      {
+        "theme": "Notification",
+        "idea": "Développer une fonctionnalité de notification automatique pour les résumés IA",
+        "title": "Notification automatique pour résumés IA",
+        "why": "Pour informer les utilisateurs dès que leur résumé IA est prêt, améliorant ainsi l'expérience utilisateur et la productivité",
+        "confidence": 0.9,
+        "summary": "Développer une fonctionnalité de notification automatique pour les résumés ia",
+        "user_story": "En tant que développeur d'applications d'intelligence artificielle, je veux développer une fonctionnalité de notification automatique pour les résumés IA afin de garantir que les utilisateurs soient informés en temps réel des mises à jour et des résultats des analyses.",
+        "acceptance_criteria": [
+          "La fonctionnalité de notification automatique doit être capable d'envoyer des notifications à au moins 100 utilisateurs simultanément sans retard.",
+          "Les notifications doivent contenir un résumé des résultats de l'analyse IA, y compris les principaux points et les recommandations.",
+          "La fonctionnalité doit être intégrée à l'interface utilisateur existante de l'application, avec des options de personnalisation pour les utilisateurs.",
+          "Les notifications doivent être sécurisées et protégées contre les accès non autorisés, avec un système de gestion des permissions pour les utilisateurs.",
+          "La fonctionnalité doit être testée avec succès sur au moins trois plateformes différentes (desktop, mobile, tablette) avant sa mise en production."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 3.0
+      },
+      {
+        "theme": "Objectif",
+        "idea": "Développer de nouvelles fonctionnalités pour le Dashboard Mindloop",
+        "title": "Amélioration du Dashboard Mindloop pour suivre les performances.",
+        "why": "L'objectif est d'améliorer le Dashboard Mindloop, ce qui implique l'ajout de nouvelles fonctionnalités ou l'amélioration des existantes",
+        "confidence": 0.8,
+        "summary": "Développer de nouvelles fonctionnalités pour le dashboard mindloop",
+        "user_story": "En tant que responsable de projet, je veux développer de nouvelles fonctionnalités pour le Dashboard Mindloop afin de mieux suivre et analyser les performances de mon équipe.",
+        "acceptance_criteria": [
+          "Le Dashboard Mindloop doit afficher les indicateurs de performance clés (IPC) en temps réel.",
+          "Les utilisateurs doivent pouvoir personnaliser les tableaux de bord en fonction de leurs besoins spécifiques.",
+          "Le système doit être capable de générer des rapports détaillés sur les performances de l'équipe sur une période donnée.",
+          "Le Dashboard Mindloop doit être accessible sur différents appareils et navigateurs web."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      },
+      {
+        "theme": "Indicateur qualité",
+        "idea": "Développer un indicateur de qualité du meeting",
+        "title": "Indicateur de qualité de réunion pour les organisateurs.",
+        "why": "Pour évaluer efficacement la qualité des réunions et identifier les domaines d'amélioration",
+        "confidence": 0.9,
+        "summary": "Disposer d'un indicateur de qualité du meeting",
+        "user_story": "En tant que organisateur de réunions, je veux disposer d'un indicateur de qualité du meeting afin de mesurer l'efficacité et l'impact de mes réunions sur l'équipe.",
+        "acceptance_criteria": [
+          "L'indicateur de qualité du meeting doit être calculé en fonction de la satisfaction des participants, évaluée à travers un sondage après chaque réunion.",
+          "L'indicateur doit prendre en compte les objectifs fixés avant la réunion et leur réalisation effective.",
+          "L'indicateur doit être présenté sous forme de score ou de notation, facile à comprendre et à interpréter par les organisateurs de réunions.",
+          "L'indicateur doit être mis à jour en temps réel après chaque réunion, pour refléter les résultats les plus récents.",
+          "L'indicateur doit être accessible à tous les organisateurs de réunions, pour favoriser la transparence et l'amélioration continue."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      },
+      {
+        "theme": "Epingler projet",
+        "idea": "Fonctionnalité d'épinglage de projets",
+        "title": "Épingle des projets importants sur le tableau de bord",
+        "why": "Permettre aux utilisateurs de donner la priorité et de suivre facilement les projets les plus importants",
+        "confidence": 0.9,
+        "summary": "Pouvoir épingler des projets importants sur mon tableau de bord",
+        "user_story": "En tant que gestionnaire de projets, je veux pouvoir épingler des projets importants sur mon tableau de bord afin de pouvoir accéder rapidement aux informations clés de ces projets et de suivre leur progression de manière efficace.",
+        "acceptance_criteria": [
+          "L'utilisateur peut épingler un maximum de 5 projets sur son tableau de bord.",
+          "Les projets épinglés apparaissent en haut de la liste des projets avec une icône distincte pour les identifier.",
+          "L'utilisateur reçoit une notification lorsque l'un de ses projets épinglés est mis à jour.",
+          "Les projets épinglés sont accessibles à partir de n'importe quelle page du système.",
+          "L'utilisateur peut supprimer un projet épinglé à tout moment."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      }
+    ],
+    "segments": [
+      {
+        "theme": "Objectif",
+        "content": "Aujourd'hui notre objectif est d'améliorer le Dashboard Mindloop"
+      },
+      {
+        "theme": "Indicateur qualité",
+        "content": "Première priorité, ajouter un indicateur de qualité du meeting"
+      },
+      {
+        "theme": "Epingler projet",
+        "content": "Deuxième point, permettre aux utilisateurs d'épingler un projet important"
+      },
+      {
+        "theme": "Notification",
+        "content": "Et dernier point, notifier automatiquement quand un résumé IA est prêt"
+      }
+    ],
+    "quality": {
+      "confidence": 0.88,
+      "diversity": 1.0,
+      "pertinence": 1.0,
+      "global_score": 0.94
+    },
+    "meeting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    },
+    "consulting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    }
+  }
+}

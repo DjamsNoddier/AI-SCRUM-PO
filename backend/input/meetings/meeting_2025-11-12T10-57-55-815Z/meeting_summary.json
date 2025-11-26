@@ -1,0 +1,29 @@
+{
+  "meeting_id": "meeting_2025-11-12T10-57-55-815Z",
+  "audio_path": "input/meetings/meeting_2025-11-12T10-57-55-815Z/recording.wav",
+  "user_stories_count": 3,
+  "themes": [],
+  "user_stories": {
+    "user_stories": [],
+    "segments": [
+      {
+        "theme": "Introduction",
+        "content": "Donc aujourd'hui c'est un team de story mapping, product discovery, appelez-le comme vous voulez."
+      },
+      {
+        "theme": "Objet",
+        "content": "On va parler de la solution TechRequest."
+      },
+      {
+        "theme": "Objectifs",
+        "content": "Aujourd'hui ce qu'on aimerait faire c'est réduire les délais de réponse et apporter un maximum de"
+      }
+    ],
+    "quality": {
+      "confidence": 0,
+      "diversity": 0,
+      "pertinence": 0,
+      "global_score": 0
+    }
+  }
+}

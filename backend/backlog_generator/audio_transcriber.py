@@ -4,7 +4,6 @@ audio_transcriber.py
 Transcrit un feedback audio (voix) en texte clair,
 segmente automatiquement la discussion par thèmes (clustering sémantique),
 puis génère une ou plusieurs User Stories par idée détectée.
-Peut enfin les exporter automatiquement vers Jira.
 
 Fait partie du projet : AI Scrum PO Assistant
 Auteur : Djamil
@@ -16,18 +15,73 @@ import json
 from pathlib import Path
 from difflib import SequenceMatcher
 from dotenv import load_dotenv
+from functools import lru_cache
 from groq import Groq
+
 from .consolidator import consolidate_user_stories
 from .generator import generate_user_story, generate_short_title
 from .jira_client import export_user_stories_to_jira
+from .logger_manager import info, warn, error
 
 
 # -------------------------
-# ⚙️ Initialisation
+# ⚙️ Chargement du .env
 # -------------------------
-env_path = Path(__file__).resolve().parent.parent / ".env"
-load_dotenv(dotenv_path=env_path)
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+ROOT_DIR = Path(__file__).resolve().parents[2]
+ENV_PATH = ROOT_DIR / ".env"
+
+if ENV_PATH.exists():
+    load_dotenv(dotenv_path=ENV_PATH)
+else:
+    warn(f"Fichier .env non trouvé à {ENV_PATH}")
+
+
+# -------------------------
+# 🧠 Initialisation paresseuse du client Groq
+# -------------------------
+@lru_cache()
+def get_groq_client():
+    """Initialise le client Groq une seule fois et le met en cache."""
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        raise RuntimeError("❌ GROQ_API_KEY manquant. Vérifie ton fichier .env à la racine du projet.")
+    return Groq(api_key=api_key)
+
+
+# -------------------------
+# 🔧 Helper JSON robuste
+# -------------------------
+def _extract_json_block(raw: str, context: str) -> dict:
+    """
+    Tente d'extraire un vrai JSON depuis la réponse du modèle.
+    Gère les cas :
+    - ```json ... ```
+    - texte avant/après le JSON
+    """
+    if not raw:
+        raise ValueError("Réponse vide")
+
+    txt = raw.strip()
+
+    # Cas 1 : bloc markdown ```json ... ```
+    if txt.startswith("```"):
+        # on enlève ```json / ``` et on garde l'intérieur
+        txt = re.sub(r"^```[a-zA-Z]*\s*", "", txt)
+        txt = re.sub(r"```$", "", txt.strip()).strip()
+
+    # Cas 2 : il y a du texte autour, on récupère entre le 1er { et le dernier }
+    start = txt.find("{")
+    end = txt.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        txt = txt[start:end + 1]
+
+    try:
+        return json.loads(txt)
+    except json.JSONDecodeError as e:
+        # Log détaillé pour debug, mais on ne fait pas planter le backend
+        warn(f"Erreur parsing JSON ({context})", error=str(e), raw_preview=txt[:300])
+        raise
+
 
 # -------------------------
 # 🧰 Nettoyage / déduplication
@@ -57,13 +111,14 @@ def transcribe_audio(file_path: str) -> str:
         raise FileNotFoundError(f"❌ Fichier introuvable : {file_path}")
 
     with open(file_path, "rb") as audio_file:
+        client = get_groq_client()
         response = client.audio.transcriptions.create(
             model="whisper-large-v3-turbo",
             file=audio_file
         )
 
     text = response.text.strip()
-    print(f"🎙️ Transcription terminée : {len(text.split())} mots détectés")
+    info("Transcription terminée", file=file_path, word_count=len(text.split()))
     return text
 
 
@@ -71,9 +126,7 @@ def transcribe_audio(file_path: str) -> str:
 # 🧩 Segmentation de la conversation
 # -------------------------
 def segment_conversation_llm(transcribed_text: str) -> list[dict]:
-    """
-    Découpe le texte transcrit en segments thématiques exploitables pour le backlog.
-    """
+    """Découpe le texte transcrit en segments thématiques exploitables pour le backlog."""
     prompt = f"""
 Tu es un facilitateur d'atelier produit.
 Découpe le texte suivant en 3 à 8 segments logiques,
@@ -83,13 +136,14 @@ chacun correspondant à un thème produit cohérent.
 - Donne pour chaque segment :
   - "theme": titre court (max 8 mots)
   - "content": le texte cohérent du segment
-- Réponds STRICTEMENT en JSON valide au format :
+- Réponds STRICTEMENT en JSON valide :
 {{"segments":[{{"theme":"...","content":"..."}}]}}.
 
 Texte :
 \"\"\"{transcribed_text}\"\"\"
 """
     try:
+        client = get_groq_client()
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
@@ -99,14 +153,14 @@ Texte :
             temperature=0.25,
         )
         raw = response.choices[0].message.content.strip()
-        data = json.loads(raw)
+        data = _extract_json_block(raw, context="segmentation")
         return [
             {"theme": s["theme"].strip(), "content": s["content"].strip()}
             for s in data.get("segments", [])
             if s.get("content") and len(s["content"].split()) > 5
         ]
-    except Exception:
-        # fallback simple : 1 segment global
+    except Exception as e:
+        error("Erreur segmentation conversation", error=str(e))
         return [{"theme": "Discussion générale", "content": transcribed_text}]
 
 
@@ -117,7 +171,6 @@ def is_segment_about_product(segment_text: str) -> bool:
     """Vérifie si un segment contient une discussion produit réelle."""
     prompt = f"""
 Dis seulement "oui" ou "non".
-
 Réponds "oui" si ce texte contient une discussion produit :
 fonctionnalités, problèmes utilisateurs, idées d'amélioration,
 besoins métier, ou retours sur un produit existant.
@@ -126,6 +179,7 @@ Sinon, réponds "non".
 Texte :
 \"\"\"{segment_text}\"\"\"
 """
+    client = get_groq_client()
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": prompt}],
@@ -138,33 +192,21 @@ Texte :
 # 🧩 Extraction d’idées produit
 # -------------------------
 def extract_ideas_from_segment(segment_text: str) -> list[dict]:
-    """
-    Extrait les besoins produit explicites et implicites du segment.
-    Retourne une liste structurée d'idées (JSON).
-    """
+    """Extrait les besoins produit explicites et implicites du segment."""
     prompt = f"""
 Tu es un Product Manager senior assistant à un atelier produit.
 Analyse ce segment et identifie les besoins produit exprimés (ou implicites).
 Ignore le bruit conversationnel.
 
 Retourne STRICTEMENT en JSON :
-{{
-  "ideas": [
-    {{
-      "idea": "besoin ou problème détecté",
-      "title": "titre court et clair",
-      "why": "raison ou objectif du besoin",
-      "confidence": 0.0–1.0
-    }}
-  ]
-}}
-
+{{"ideas":[{{"idea":"...","title":"...","why":"...","confidence":0.0}}]}}
 Si aucune idée produit n'est trouvée : {{"ideas":[]}}
 
 Segment :
 \"\"\"{segment_text}\"\"\"
 """
     try:
+        client = get_groq_client()
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
@@ -173,43 +215,28 @@ Segment :
             ],
             temperature=0.3,
         )
-        data = json.loads(response.choices[0].message.content.strip())
-        return [
-            i for i in data.get("ideas", [])
-            if i.get("idea") and i.get("confidence", 0) >= 0.5
-        ]
-    except Exception:
+        raw = response.choices[0].message.content.strip()
+        data = _extract_json_block(raw, context="extraction_idées")
+        return [i for i in data.get("ideas", []) if i.get("idea") and i.get("confidence", 0) >= 0.5]
+    except Exception as e:
+        warn("Erreur extraction d’idées", error=str(e))
         return []
+
 
 # -------------------------
 # 📊 Scoring de la qualité globale
 # -------------------------
 def compute_us_quality_score(user_stories: list[dict]) -> dict:
-    """
-    Évalue la qualité globale des User Stories générées :
-    - confiance moyenne (si disponible dans les idées)
-    - diversité (thèmes distincts / total)
-    - ratio pertinence (titre + critères non vides)
-    """
+    """Évalue la qualité globale des User Stories générées."""
     if not user_stories:
         return {"confidence": 0, "diversity": 0, "pertinence": 0, "global_score": 0}
 
-    # Moyenne des scores de confiance
     confidences = [us.get("confidence", 0) for us in user_stories]
     avg_confidence = sum(confidences) / len(confidences) if confidences else 0
-
-    # Diversité thématique
     themes = {us["theme"] for us in user_stories if us.get("theme")}
     diversity = len(themes) / len(user_stories)
-
-    # Pertinence basique : titre et critères non vides
-    valid_us = [
-        us for us in user_stories
-        if us.get("title") and us.get("acceptance_criteria")
-    ]
+    valid_us = [us for us in user_stories if us.get("title") and us.get("acceptance_criteria")]
     pertinence = len(valid_us) / len(user_stories)
-
-    # Score global pondéré
     global_score = round((avg_confidence * 0.5 + diversity * 0.3 + pertinence * 0.2), 2)
 
     return {
@@ -221,41 +248,38 @@ def compute_us_quality_score(user_stories: list[dict]) -> dict:
 
 
 # -------------------------
-# 🚀 Pipeline complet : audio → US
+# 🚀 Pipeline complet : audio → US + summaries
 # -------------------------
 def process_audio_feedback(file_path: str, push_to_jira: bool = False):
     """Pipeline principal complet"""
+    info("Pipeline IA démarré", file=file_path)
+
     # Étape 1 : transcription
     text = transcribe_audio(file_path)
-    print("\n🧠 Texte transcrit :")
-    print(text[:400] + ("..." if len(text) > 400 else ""))
+    info("Transcription terminée", word_count=len(text.split()))
 
     # Étape 2 : segmentation
-    print("\n🧩 Segmentation de la conversation...")
     segments = segment_conversation_llm(text)
-    print(f"✅ {len(segments)} segment(s) détecté(s).\n")
+    info("Segmentation effectuée", segments_count=len(segments))
 
-    user_stories = []
+    user_stories: list[dict] = []
 
     # Étape 3 : boucle segment → idées
     for idx, seg in enumerate(segments, 1):
-        print(f"🎯 Segment {idx}/{len(segments)} — Thème : {seg['theme']}")
+        info("Traitement segment", index=idx, theme=seg["theme"])
+
         if not is_segment_about_product(seg["content"]):
-            print("🗨️ Segment conversationnel ignoré.\n")
+            warn("Segment ignoré (non-produit)", theme=seg["theme"])
             continue
 
         ideas = extract_ideas_from_segment(seg["content"])
         if not ideas:
-            print("⚠️ Aucun besoin détecté dans ce segment.\n")
+            warn("Aucune idée détectée", theme=seg["theme"])
             continue
 
-        print(f"💡 {len(ideas)} idée(s) pertinentes détectées :")
-        for idea in ideas[:2]:  # max 2 idées/segment pour éviter le spam
-            print(f"   → {idea['title']} ({idea['confidence']:.2f})")
-
+        for idea in ideas[:2]:
             story = generate_user_story(idea["idea"])
             short_title = generate_short_title(story["user_story"])
-
             enriched = {
                 "theme": seg["theme"],
                 "idea": idea["idea"],
@@ -265,40 +289,186 @@ def process_audio_feedback(file_path: str, push_to_jira: bool = False):
                 **story
             }
             user_stories.append(enriched)
-            print(f"✅ {short_title} → {story['user_story']}\n")
 
     # Étape 4 : consolidation finale
-    print("\n🔁 Consolidation des User Stories similaires...")
     before = len(user_stories)
     user_stories = consolidate_user_stories(user_stories, threshold=0.8)
     after = len(user_stories)
-    print(f"✅ {before - after} fusion(s), {after} User Stories finales.\n")
+    info("Consolidation terminée", before=before, after=after)
 
     # Étape 5 : export Jira
     if push_to_jira and user_stories:
-        print("🚀 Export vers Jira...")
+        info("Export Jira activé", count=len(user_stories))
         export_user_stories_to_jira(user_stories)
     else:
-        print("ℹ️ Export Jira désactivé.")
+        info("Export Jira désactivé")
 
-        # Évaluation de la qualité
-    print("\n📊 Évaluation de la qualité des User Stories...")
+    # Étape 6 : scoring qualité
     quality = compute_us_quality_score(user_stories)
-    print(f"   - Confiance moyenne : {quality['confidence']:.2f}")
-    print(f"   - Diversité thématique : {quality['diversity']:.2f}")
-    print(f"   - Pertinence : {quality['pertinence']:.2f}")
-    print(f"   👉 Score global : {quality['global_score']:.2f}\n")
+    info("Qualité évaluée", **quality)
+
+    # Étape 7 : résumé meeting (même sans US)
+    meeting_summary = summarize_meeting(text)
+
+    # Étape 8 : résumé consultant premium
+    consulting_summary = generate_consulting_summary(text, user_stories)
+
+    # Résumé global
+    info(
+        "Pipeline IA terminé",
+        file=file_path,
+        segments=len(segments),
+        user_stories=len(user_stories)
+    )
+
+    return {
+        "transcription": text,          # ⬅️ utilisé par le backend
+        "user_stories": user_stories,
+        "segments": segments,
+        "quality": quality,
+        "meeting_summary": meeting_summary,
+        "consulting_summary": consulting_summary,
+    }
 
 
-    # Résumé
-    print("\n🧾 RÉSUMÉ FINAL -------------------")
-    print(f"🎙️ Fichier : {file_path}")
-    print(f"🧩 {len(segments)} segment(s) analysé(s)")
-    print(f"🧱 {len(user_stories)} User Stories générée(s)\n")
-    for i, us in enumerate(user_stories, 1):
-        print(f"{i}. 🧱 [{us['theme']}] {us['title']}")
-        print(f"   🗣️ Idée : {us['idea']}")
-        print(f"   ⭐ Priorité : {us['priority']}\n")
+# -------------------------
+# 🧾 Résumé meeting structuré
+# -------------------------
+def summarize_meeting(transcribed_text: str) -> dict:
+    """
+    Résume le meeting entier et extrait :
+    - contexte
+    - points clés
+    - décisions
+    - risques
+    - next steps
+    Même si aucune user story n’a été trouvée.
+    """
 
-    print("✅ Pipeline audio multi-intervenants terminé.")
-    return user_stories
+    prompt = f"""
+Tu es un assistant IA spécialisé dans les réunions produit.
+
+À partir de ce texte transcrit, produis un résumé structuré.
+Même si le texte n’est pas très clair, fais de ton mieux pour remplir les sections.
+
+Retourne STRICTEMENT en JSON :
+{{
+  "context": "...",
+  "key_points": ["...", "..."],
+  "decisions": ["...", "..."],
+  "risks": ["...", "..."],
+  "next_steps": ["...", "..."]
+}}
+
+Texte :
+\"\"\"{transcribed_text}\"\"\"
+"""
+
+    try:
+        client = get_groq_client()
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": "Tu es un expert en analyse de réunion. Réponds uniquement en JSON valide."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3,
+        )
+
+        raw = response.choices[0].message.content.strip()
+        data = _extract_json_block(raw, context="resume_meeting")
+        return {
+            "context": data.get("context", ""),
+            "key_points": data.get("key_points", []) or [],
+            "decisions": data.get("decisions", []) or [],
+            "risks": data.get("risks", []) or [],
+            "next_steps": data.get("next_steps", []) or [],
+        }
+
+    except Exception as e:
+        warn("Erreur résumé meeting", error=str(e))
+        return {
+            "context": "",
+            "key_points": [],
+            "decisions": [],
+            "risks": [],
+            "next_steps": []
+        }
+
+
+# -------------------------
+# 💼 Résumé consultant (premium)
+# -------------------------
+def generate_consulting_summary(transcribed_text: str, user_stories: list[dict]) -> dict:
+    """
+    Génère un résumé premium style consultant (McKinsey-like).
+    S'appuie sur : transcription brute + US générées.
+    Retourne un bloc JSON structuré.
+    """
+
+    prompt = f"""
+Tu es un consultant senior (McKinsey / BCG).
+Produis un résumé PREMIUM du meeting.
+
+Utilise :
+- la transcription brute
+- les user stories ci-dessous
+
+User Stories détectées :
+{json.dumps(user_stories, ensure_ascii=False, indent=2)}
+
+Transcription :
+\"\"\"{transcribed_text}\"\"\"
+
+Structure attendue STRICTEMENT en JSON valide :
+{{
+  "context": "2-3 lignes claires résumant le sujet du meeting",
+  "key_points": ["point clé 1", "point clé 2", ...],
+  "decisions": ["décision 1", "décision 2"],
+  "risks": ["risque 1", "risque 2"],
+  "next_steps": ["action 1", "action 2", "action 3"]
+}}
+
+Rappels :
+- pas de texte hors JSON
+- écris des phrases concises, orientées action
+- bullet points courts
+"""
+
+    try:
+        client = get_groq_client()
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Tu es un consultant McKinsey. Livrable ultra clair. Réponds uniquement en JSON."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.3,
+        )
+
+        raw = response.choices[0].message.content.strip()
+        data = _extract_json_block(raw, context="consulting_summary")
+
+        return {
+            "context": data.get("context", ""),
+            "key_points": data.get("key_points", []) or [],
+            "decisions": data.get("decisions", []) or [],
+            "risks": data.get("risks", []) or [],
+            "next_steps": data.get("next_steps", []) or [],
+        }
+
+    except Exception as e:
+        warn("Erreur résumé consultant", error=str(e))
+        return {
+            "context": "",
+            "key_points": [],
+            "decisions": [],
+            "risks": [],
+            "next_steps": []
+        }

@@ -1,0 +1,186 @@
+{
+  "meeting_id": "meeting_2025-11-25_224548_beab",
+  "audio_path": "input/projects/nouveau-1/meetings/test-de-speech-dix-lignes-2025-11-25-224548-beab/recording.wav",
+  "created_at": "2025-11-25T22:47:17.646827",
+  "user_stories": [
+    {
+      "theme": "Notifications",
+      "idea": "Mettre en place un système de notification fiable pour éviter que les alertes e-mail soient considérées comme du spam",
+      "title": "Système de notification fiable pour les alertes de sécurité.",
+      "why": "Les clients doivent recevoir les alertes importantes sans interruption pour une expérience utilisateur fluide",
+      "confidence": 0.9,
+      "summary": "Mettre en place un système de notification fiable pour éviter que les alertes e-mail soient considérées comme du spam",
+      "user_story": "En tant que responsable de la sécurité informatique, je veux mettre en place un système de notification fiable pour éviter que les alertes e-mail soient considérées comme du spam afin de réduire le risque de perte d'informations importantes et d'améliorer la confiance dans notre système de notification.",
+      "acceptance_criteria": [
+        "Le taux d'ouverture des notifications doit augmenter de 20% par rapport aux alertes e-mail actuelles.",
+        "Le système de notification doit être capable de détecter et de bloquer les faux positifs avec une précision de 95% ou plus.",
+        "Les utilisateurs doivent recevoir les notifications dans un délai de 5 minutes après l'événement déclencheur, avec une fiabilité de 99%.",
+        "Le système doit fournir des options de personnalisation pour les utilisateurs afin qu'ils puissent choisir les types de notifications qu'ils souhaitent recevoir.",
+        "Le système de notification doit être compatible avec les principaux fournisseurs de messagerie électronique et les appareils mobiles."
+      ],
+      "priority": "Haute",
+      "relevance_score": 3.0
+    },
+    {
+      "theme": "Tableau de bord",
+      "idea": "Développer une fonctionnalité de personnalisation des widgets sur le tableau de bord",
+      "title": "Personnalisation des widgets de tableau de bord",
+      "why": "Améliorer la productivité des clients en leur permettant d'adapter le tableau de bord à leurs besoins spécifiques",
+      "confidence": 0.8,
+      "summary": "Personnaliser les widgets sur le tableau de bord",
+      "user_story": "En tant qu'utilisateur du tableau de bord, je veux personnaliser les widgets sur le tableau de bord afin de pouvoir afficher les informations les plus pertinentes pour mon travail de manière efficace.",
+      "acceptance_criteria": [
+        "L'utilisateur peut ajouter ou supprimer des widgets sur le tableau de bord",
+        "L'utilisateur peut réorganiser les widgets sur le tableau de bord selon ses préférences",
+        "L'utilisateur reçoit un message de confirmation lorsqu'il a sauvegardé avec succès sa configuration de widgets personnalisée",
+        "Les widgets personnalisés sont affichés correctement sur le tableau de bord après une mise à jour ou un redémarrage de l'application",
+        "Les paramètres de personnalisation des widgets sont sauvegardés pour chaque utilisateur individuellement"
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Prochaines étapes",
+      "idea": "Personnalisation du dashboard",
+      "title": "Personnalisation du dashboard utilisateur",
+      "why": "Pour offrir une expérience plus personnalisée et engageante pour les utilisateurs",
+      "confidence": 0.8,
+      "summary": "Personnaliser mon dashboard",
+      "user_story": "En tant qu'utilisateur du système, je veux personnaliser mon dashboard afin de mieux organiser mes informations et améliorer mon efficacité.",
+      "acceptance_criteria": [
+        "L'utilisateur peut ajouter ou supprimer des widgets du dashboard.",
+        "L'utilisateur peut réorganiser les widgets sur le dashboard pour correspondre à ses préférences.",
+        "L'utilisateur peut enregistrer ses préférences de personnalisation pour une utilisation future.",
+        "Le système sauvegarde automatiquement les modifications apportées au dashboard.",
+        "Le système affiche un message de confirmation lorsque les modifications sont enregistrées avec succès."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Prochaines étapes",
+      "idea": "Amélioration de la latence API",
+      "title": "Réduction de la latence de lAPI",
+      "why": "Pour réduire les temps de chargement et améliorer la réactivité de l'application",
+      "confidence": 0.9,
+      "summary": "Réduire la latence de notre api",
+      "user_story": "En tant que développeur d'applications, je veux réduire la latence de notre API afin d'améliorer l'expérience utilisateur et accélérer les traitements de données.",
+      "acceptance_criteria": [
+        "La latence moyenne de l'API est inférieure à 200 ms pour 90% des requêtes.",
+        "Le temps de réponse maximum de l'API ne dépasse pas 500 ms pour les requêtes les plus lourdes.",
+        "La fréquence des timeouts de connexion est réduite de 30% par rapport aux valeurs actuelles.",
+        "Les tests de performance montrent une amélioration de 25% de la vitesse de traitement des données par rapport aux résultats précédents."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Synchronisation api",
+      "idea": "Système de rafraîchissement automatique",
+      "title": "Mise à jour automatique des données en temps réel",
+      "why": "Réduire le délai de synchronisation entre l'API et les données affichées pour minimiser la frustration des utilisateurs",
+      "confidence": 0.8,
+      "summary": "Que le système de rafraîchissement automatique mette à jour les données en temps réel",
+      "user_story": "En tant qu'administrateur système, je veux que le système de rafraîchissement automatique mette à jour les données en temps réel afin de garantir l'exactitude et la fiabilité des informations.",
+      "acceptance_criteria": [
+        "Le système doit être capable de rafraîchir les données au moins toutes les 5 minutes.",
+        "Le temps de rafraîchissement doit être inférieur à 1 seconde pour éviter les interruptions.",
+        "Le système doit être en mesure de gérer un minimum de 1000 utilisateurs simultanément sans affecter les performances.",
+        "Le système doit envoyer une notification en cas de défaillance du rafraîchissement automatique."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.0
+    },
+    {
+      "theme": "Notifications",
+      "idea": "Développer une fonctionnalité de notification personnalisable pour les changements de statut des tâches",
+      "title": "Notifications personnalisées de statut de tâche",
+      "why": "Les utilisateurs ont besoin d'être informés en temps réel des mises à jour des tâches pour une meilleure gestion de projet",
+      "confidence": 0.8,
+      "summary": "Recevoir des notifications personnalisables pour les changements de statut des tâches",
+      "user_story": "En tant que membre de l'équipe de projet, je veux recevoir des notifications personnalisables pour les changements de statut des tâches afin de rester informé en temps réel et de prendre des décisions éclairées.",
+      "acceptance_criteria": [
+        "Le système permet aux utilisateurs de configurer les types de notifications qu'ils souhaitent recevoir en fonction des changements de statut des tâches.",
+        "Les notifications sont envoyées en temps réel lorsqu'un changement de statut est effectué sur une tâche.",
+        "Les utilisateurs peuvent personnaliser les canaux de notification (courriel, notification système, etc.) pour recevoir les informations de changement de statut.",
+        "Le système stocke l'historique des notifications envoyées pour une période déterminée, permettant aux utilisateurs de consulter les notifications précédentes."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.0
+    }
+  ],
+  "user_stories_count": 6,
+  "themes": [
+    "Notifications",
+    "Prochaines étapes",
+    "Synchronisation api",
+    "Tableau de bord"
+  ],
+  "quality": {
+    "confidence": 0.83,
+    "diversity": 0.67,
+    "pertinence": 1.0,
+    "global_score": 0.82
+  },
+  "sections": {
+    "context": "Réunion pour clarifier les priorités de la prochaine version de la plateforme",
+    "key_points": [
+      "Personnalisation des widgets du tableau de bord",
+      "Amélioration du délai de synchronisation entre l'API et les données affichées",
+      "Ajout d'un système de rafraîchissement automatique",
+      "Extension des notifications pour inclure les changements de statut des tâches"
+    ],
+    "decisions": [
+      "Réalisier un POC de personnalisation du dashboard",
+      "Améliorer la latence de l'API",
+      "Préparer une nouvelle stratégie de notification push pour mobile"
+    ],
+    "risks": [
+      "Les alertes e-mail partent en spam et ne sont pas reçues par certains clients"
+    ],
+    "next_steps": [
+      "Réalisier un POC de personnalisation du dashboard",
+      "Améliorer la latence de l'API",
+      "Préparer une nouvelle stratégie de notification push pour mobile"
+    ]
+  },
+  "top_user_stories": [
+    {
+      "title": "Système de notification fiable pour les alertes de sécurité.",
+      "priority": "Haute",
+      "theme": "Notifications"
+    },
+    {
+      "title": "Personnalisation des widgets de tableau de bord",
+      "priority": "Moyenne",
+      "theme": "Tableau de bord"
+    },
+    {
+      "title": "Personnalisation du dashboard utilisateur",
+      "priority": "Moyenne",
+      "theme": "Prochaines étapes"
+    }
+  ],
+  "consulting_summary": {
+    "context": "Réunion pour clarifier les priorités de la prochaine version de la plateforme, avec des retours clients sur le tableau de bord, la synchronisation API et les notifications.",
+    "key_points": [
+      "Personnalisation des widgets sur le tableau de bord",
+      "Amélioration de la latence API",
+      "Système de rafraîchissement automatique",
+      "Notifications personnalisables pour les changements de statut des tâches",
+      "Problème de spam avec les alertes e-mail"
+    ],
+    "decisions": [
+      "Développer un système de notification fiable pour éviter les faux positifs",
+      "Mettre en place un système de rafraîchissement automatique pour les données"
+    ],
+    "risks": [
+      "Perte d'informations importantes due aux alertes e-mail considérées comme du spam"
+    ],
+    "next_steps": [
+      "Réalisier un POC de personnalisation du dashboard",
+      "Améliorer la latence API",
+      "Préparer une nouvelle stratégie de notification push pour mobile"
+    ]
+  }
+}

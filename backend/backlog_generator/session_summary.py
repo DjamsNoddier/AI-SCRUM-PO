@@ -7,19 +7,24 @@ Utilisé après chaque enregistrement audio et pipeline d'analyse.
 Auteur : Djamil
 """
 
-import json
+import json   
 from pathlib import Path
 from datetime import datetime
 
-def generate_session_summary(metadata_path: str, user_stories: list[dict], quality: dict) -> dict:
+
+def generate_session_summary(metadata_path: str, user_stories: list, quality: dict) -> dict:
     """Construit un résumé structuré d'une session analysée."""
+    # Sécurisation du type de données
+    user_stories = list(user_stories or [])
     meta = {}
+
     try:
         with open(metadata_path, "r", encoding="utf-8") as f:
             meta = json.load(f)
     except FileNotFoundError:
         print(f"⚠️ Métadonnées introuvables : {metadata_path}")
 
+    # Construction du résumé
     summary = {
         "session_id": meta.get("session_id", "unknown"),
         "audio_file": meta.get("audio_file", "n/a"),
@@ -27,36 +32,50 @@ def generate_session_summary(metadata_path: str, user_stories: list[dict], quali
         "ended_at": meta.get("end_time", ""),
         "duration_sec": meta.get("duration_sec", 0),
         "timestamp_summary": datetime.now().isoformat(),
-        "quality": quality,
+        "quality": quality or {},
         "user_story_count": len(user_stories),
-        "themes_detected": list({us.get('theme') for us in user_stories if us.get('theme')}),
-        "top_user_stories": [
-            {"title": us.get("title"), "priority": us.get("priority")}
-            for us in user_stories[:3]
-        ],
+        "themes_detected": list({
+            us.get("theme") if isinstance(us, dict) else "Général"
+            for us in user_stories
+            if isinstance(us, dict) and us.get("theme")
+        }),
+        "top_user_stories": [],
     }
 
-    # Sauvegarde du résumé à côté du metadata
+    # Sélection des 3 premières user stories si présentes
+    for us in user_stories[:3]:
+        if isinstance(us, dict):
+            summary["top_user_stories"].append({
+                "title": us.get("title", "Sans titre"),
+                "priority": us.get("priority", "normal")
+            })
+        else:
+            summary["top_user_stories"].append({
+                "title": str(us),
+                "priority": "normal"
+            })
+
+    # Sauvegarde du résumé
     summary_path = Path(metadata_path).parent / "summary.json"
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=4)
-    print(f"📊 Résumé sauvegardé : {summary_path}")
 
+    print(f"📊 Résumé sauvegardé : {summary_path}")
     return summary
 
 
 def print_session_summary(summary: dict):
     """Affiche le résumé dans le terminal sous forme lisible."""
     print("\n🧾 RÉSUMÉ DE SESSION -------------------")
-    print(f"🆔 Session : {summary['session_id']}")
-    print(f"🎙️ Audio : {summary['audio_file']}")
-    print(f"⏱️ Durée : {summary['duration_sec']} sec")
-    print(f"📊 Score global : {summary['quality']['global_score']:.2f}")
-    print(f"💡 {summary['user_story_count']} User Stories générées")
-    print(f"🏷️ Thèmes détectés : {', '.join(summary['themes_detected']) or 'Aucun'}")
+    print(f"🆔 Session : {summary.get('session_id')}")
+    print(f"🎙️ Audio : {summary.get('audio_file')}")
+    print(f"⏱️ Durée : {summary.get('duration_sec')} sec")
+    print(f"📊 Score global : {summary.get('quality', {}).get('global_score', 0):.2f}")
+    print(f"💡 {summary.get('user_story_count', 0)} User Stories générées")
+    print(f"🏷️ Thèmes détectés : {', '.join(summary.get('themes_detected', [])) or 'Aucun'}")
 
     print("\n✨ Principales User Stories :")
-    for us in summary["top_user_stories"]:
-        print(f"   • {us['title']} ({us['priority']})")
+    for us in summary.get("top_user_stories", []):
+        print(f"   • {us.get('title')} ({us.get('priority')})")
 
     print("---------------------------------------\n")

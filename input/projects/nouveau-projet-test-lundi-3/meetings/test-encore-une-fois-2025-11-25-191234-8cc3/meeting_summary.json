@@ -1,0 +1,104 @@
+{
+  "meeting_id": "meeting_2025-11-25_191234_8cc3",
+  "audio_path": "input/projects/nouveau-projet-test-lundi-3/meetings/test-encore-une-fois-2025-11-25-191234-8cc3/recording.wav",
+  "created_at": "2025-11-25T19:12:56.733034",
+  "user_stories_count": 1,
+  "themes": [
+    "Objectif"
+  ],
+  "quality": {
+    "confidence": 0.8,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.9
+  },
+  "user_stories": [
+    {
+      "theme": "Objectif",
+      "idea": "Développer un outil de test pour évaluer la correspondance du dashboard aux besoins des PME",
+      "title": "Outil de test pour dashboard PME",
+      "why": "Pour garantir que le dashboard répond aux attentes et aux besoins spécifiques des petites et moyennes entreprises",
+      "confidence": 0.8,
+      "summary": "Développer un outil de test pour évaluer la correspondance du dashboard aux besoins des pme",
+      "user_story": "En tant que responsable qualité, je veux développer un outil de test pour évaluer la correspondance du dashboard aux besoins des PME afin de garantir que les fonctionnalités répondent aux attentes des utilisateurs.",
+      "acceptance_criteria": [
+        "L'outil de test peut simuler au moins 80% des scénarios d'utilisation réels des PME.",
+        "Le temps de chargement de l'outil de test ne dépasse pas 5 secondes.",
+        "L'outil de test peut générer des rapports détaillés sur les résultats des tests en moins de 2 minutes.",
+        "Les résultats des tests sont présentés de manière claire et facile à comprendre pour les utilisateurs non techniques."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Outil de test pour dashboard PME",
+      "priority": "Moyenne",
+      "theme": "Objectif"
+    }
+  ],
+  "consulting_summary": {
+    "transcription": "L'idée est de tester si le dashboard correspond au PME. L'idée est de leur offrir les meilleures sources de data afin de les guider dans leurs décisions. Ils ont besoin de pas mal de choses, notamment des insights, des graphs, des écritures, des notifications.",
+    "user_stories": [
+      {
+        "theme": "Objectif",
+        "idea": "Développer un outil de test pour évaluer la correspondance du dashboard aux besoins des PME",
+        "title": "Outil de test pour dashboard PME",
+        "why": "Pour garantir que le dashboard répond aux attentes et aux besoins spécifiques des petites et moyennes entreprises",
+        "confidence": 0.8,
+        "summary": "Développer un outil de test pour évaluer la correspondance du dashboard aux besoins des pme",
+        "user_story": "En tant que responsable qualité, je veux développer un outil de test pour évaluer la correspondance du dashboard aux besoins des PME afin de garantir que les fonctionnalités répondent aux attentes des utilisateurs.",
+        "acceptance_criteria": [
+          "L'outil de test peut simuler au moins 80% des scénarios d'utilisation réels des PME.",
+          "Le temps de chargement de l'outil de test ne dépasse pas 5 secondes.",
+          "L'outil de test peut générer des rapports détaillés sur les résultats des tests en moins de 2 minutes.",
+          "Les résultats des tests sont présentés de manière claire et facile à comprendre pour les utilisateurs non techniques."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 2.5
+      }
+    ],
+    "segments": [
+      {
+        "theme": "Objectif",
+        "content": "L'idée est de tester si le dashboard correspond au PME."
+      },
+      {
+        "theme": "Valeur ajoutée",
+        "content": "L'idée est de leur offrir les meilleures sources de data afin de les guider dans leurs décisions."
+      },
+      {
+        "theme": "Fonctionnalités",
+        "content": "Ils ont besoin de pas mal de choses, notamment des insights, des graphs, des écritures, des notifications."
+      }
+    ],
+    "quality": {
+      "confidence": 0.8,
+      "diversity": 1.0,
+      "pertinence": 1.0,
+      "global_score": 0.9
+    },
+    "meeting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    },
+    "consulting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    }
+  }
+}

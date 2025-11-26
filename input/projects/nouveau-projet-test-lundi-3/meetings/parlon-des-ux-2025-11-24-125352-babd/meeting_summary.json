@@ -1,0 +1,37 @@
+{
+  "meeting_id": "meeting_2025-11-24_125352_babd",
+  "audio_path": "input/projects/nouveau-projet-test-lundi-3/meetings/parlon-des-ux-2025-11-24-125352-babd/recording.wav",
+  "created_at": "2025-11-24T12:54:11.704786",
+  "user_stories_count": 3,
+  "themes": [],
+  "quality": {},
+  "user_stories": [
+    "user_stories",
+    "segments",
+    "quality"
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "user_stories",
+      "priority": "normal",
+      "theme": ""
+    },
+    {
+      "title": "segments",
+      "priority": "normal",
+      "theme": ""
+    },
+    {
+      "title": "quality",
+      "priority": "normal",
+      "theme": ""
+    }
+  ]
+}

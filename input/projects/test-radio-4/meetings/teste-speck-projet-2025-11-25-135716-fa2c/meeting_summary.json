@@ -1,0 +1,114 @@
+{
+  "meeting_id": "meeting_2025-11-25_135716_fa2c",
+  "audio_path": "input/projects/test-radio-4/meetings/teste-speck-projet-2025-11-25-135716-fa2c/recording.wav",
+  "created_at": "2025-11-25T13:58:02.724697",
+  "user_stories_count": 4,
+  "themes": [
+    "Expérience utilisateur",
+    "Filtrage projet",
+    "Optimisation page",
+    "Performances"
+  ],
+  "quality": {
+    "confidence": 0.8,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.9
+  },
+  "user_stories": [
+    {
+      "theme": "Expérience utilisateur",
+      "idea": "Développer un filtre pour améliorer l'expérience utilisateur",
+      "title": "Filtre avancé de recherche amélioré",
+      "why": "Améliorer le temps de chargement et la satisfaction de l'utilisateur",
+      "confidence": 0.8,
+      "summary": "Avoir accès à un filtre avancé pour affiner mes recherches",
+      "user_story": "En tant que utilisateur, je veux avoir accès à un filtre avancé pour affiner mes recherches afin de trouver plus rapidement les informations qui m'intéressent.",
+      "acceptance_criteria": [
+        "Le filtre doit être accessible depuis la page d'accueil du site web",
+        "Le filtre doit permettre aux utilisateurs de sélectionner au moins trois critères de recherche différents (par exemple, catégorie, date, auteur)",
+        "Le filtre doit afficher les résultats de recherche en moins de 2 secondes après avoir appliqué les critères de recherche",
+        "Le filtre doit être compatible avec les principaux navigateurs web (Chrome, Firefox, Safari)"
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Performances",
+      "idea": "Optimiser les requêtes de base de données pour réduire le temps de chargement",
+      "title": "Optimisation des requêtes de base de données",
+      "why": "Pour améliorer l'expérience utilisateur et réduire la frustration liée aux temps de chargement longs",
+      "confidence": 0.8,
+      "summary": "Optimiser les requêtes de base de données pour réduire le temps de chargement",
+      "user_story": "En tant que développeur d'applications, je veux optimiser les requêtes de base de données pour réduire le temps de chargement afin d'améliorer l'expérience utilisateur et réduire les coûts de maintenance.",
+      "acceptance_criteria": [
+        "Le temps de chargement des pages les plus fréquentées est réduit de 30% en moyenne.",
+        "Les requêtes de base de données sont exécutées en moins de 500 millisecondes dans 90% des cas.",
+        "Le nombre de requêtes de base de données par seconde est réduit de 25% en moyenne.",
+        "Les tests de performance montrent une amélioration de 20% de la réactivité globale de l'application.",
+        "Les indicateurs de performance de la base de données (CPU, mémoire, etc.) sont réduits de 15% en moyenne."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Filtrage projet",
+      "idea": "Ajouter un champ de filtrage et un bouton de renommage sur la page projet",
+      "title": "Filtrage et renommage de projets",
+      "why": "Permettre au PO de gérer efficacement les projets et de les renommer facilement",
+      "confidence": 0.8,
+      "summary": "Pouvoir filtrer les éléments de projet et renommer les projets existants sur la page projet",
+      "user_story": "En tant que gestionnaire de projet, je veux pouvoir filtrer les éléments de projet et renommer les projets existants sur la page projet afin de gagner du temps et d'améliorer l'organisation de mes projets.",
+      "acceptance_criteria": [
+        "Le champ de filtrage est visible et fonctionnel sur la page projet.",
+        "Le bouton de renommage est présent et accessible pour chaque projet.",
+        "Lorsque je saisie des critères de filtrage, les résultats affichés sont pertinents et à jour.",
+        "Lorsque je clique sur le bouton de renommage, je peux modifier le nom du projet et les changements sont sauvegardés avec succès."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    },
+    {
+      "theme": "Optimisation page",
+      "idea": "Créer une page projet personnalisable pour les product managers",
+      "title": "Page de projet personnalisable",
+      "why": "Pour permettre aux product managers d'accéder rapidement aux informations les plus pertinentes",
+      "confidence": 0.8,
+      "summary": "Avoir une page projet personnalisable",
+      "user_story": "En tant que Product Manager, je veux avoir une page projet personnalisable afin de mieux organiser et suivre l'avancement de mes projets.",
+      "acceptance_criteria": [
+        "La page projet personnalisable doit permettre l'ajout de sections personnalisées telles que des tableaux de bord, des listes de tâches et des calendriers.",
+        "La page projet doit être accessible via un lien unique et sécurisé pour chaque utilisateur.",
+        "La personnalisation de la page projet doit être possible sans nécessiter de connaissances en codage ou en développement.",
+        "La page projet personnalisable doit être compatible avec les appareils mobiles et les ordinateurs de bureau.",
+        "Les données affichées sur la page projet doivent être mises à jour en temps réel pour refléter les changements apportés aux projets."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Filtre avancé de recherche amélioré",
+      "priority": "Moyenne",
+      "theme": "Expérience utilisateur"
+    },
+    {
+      "title": "Optimisation des requêtes de base de données",
+      "priority": "Moyenne",
+      "theme": "Performances"
+    },
+    {
+      "title": "Filtrage et renommage de projets",
+      "priority": "Moyenne",
+      "theme": "Filtrage projet"
+    }
+  ]
+}

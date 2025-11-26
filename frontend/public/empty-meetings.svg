@@ -1,0 +1,25 @@
+<svg width="360" height="260" viewBox="0 0 360 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="meetingGlow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#3B82F6" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#020617" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="meetingLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#A855F7" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="180" cy="95" rx="140" ry="90" fill="url(#meetingGlow)" opacity="0.7"/>
+  <ellipse cx="180" cy="200" rx="95" ry="20" fill="#020617" opacity="0.8"/>
+
+  <rect x="110" y="85" width="140" height="60" rx="12" fill="#0F172A" stroke="#1E293B"/>
+
+  <!-- Lines -->
+  <rect x="125" y="105" width="110" height="4" rx="2" fill="url(#meetingLine)"/>
+  <rect x="125" y="120" width="85" height="4" rx="2" fill="#64748B" opacity="0.4"/>
+  <rect x="125" y="135" width="95" height="4" rx="2" fill="#64748B" opacity="0.35"/>
+</svg>

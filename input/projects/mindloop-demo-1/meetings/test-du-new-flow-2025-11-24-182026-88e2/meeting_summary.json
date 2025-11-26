@@ -1,0 +1,37 @@
+{
+  "meeting_id": "meeting_2025-11-24_182026_88e2",
+  "audio_path": "input/projects/mindloop-demo-1/meetings/test-du-new-flow-2025-11-24-182026-88e2/recording.wav",
+  "created_at": "2025-11-24T18:20:35.088340",
+  "user_stories_count": 3,
+  "themes": [],
+  "quality": {},
+  "user_stories": [
+    "user_stories",
+    "segments",
+    "quality"
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "user_stories",
+      "priority": "normal",
+      "theme": ""
+    },
+    {
+      "title": "segments",
+      "priority": "normal",
+      "theme": ""
+    },
+    {
+      "title": "quality",
+      "priority": "normal",
+      "theme": ""
+    }
+  ]
+}

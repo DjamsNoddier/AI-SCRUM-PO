@@ -1,0 +1,221 @@
+{
+  "meeting_id": "meeting_2025-11-25_183821_d57c",
+  "audio_path": "input/projects/test-radio-4/meetings/mindloop-improovment-2025-11-25-183821-d57c/recording.wav",
+  "created_at": "2025-11-25T18:39:01.030700",
+  "user_stories_count": 4,
+  "themes": [
+    "Dashboard",
+    "Filtre projet",
+    "Notifications"
+  ],
+  "quality": {
+    "confidence": 0.85,
+    "diversity": 0.75,
+    "pertinence": 1.0,
+    "global_score": 0.85
+  },
+  "user_stories": [
+    {
+      "theme": "Dashboard",
+      "idea": "Ajouter un indicateur de progression pour les résumés sur le dashboard",
+      "title": "Indicateur de progression pour les résumés",
+      "why": "Réduire le temps d'attente perçu par les utilisateurs et améliorer leur expérience globale",
+      "confidence": 0.8,
+      "summary": "Avoir un indicateur de progression pour les résumés",
+      "user_story": "En tant qu'utilisateur du dashboard, je veux avoir un indicateur de progression pour les résumés afin de mieux suivre mon avancement et de planifier mes tâches de manière efficace.",
+      "acceptance_criteria": [
+        "L'indicateur de progression doit être visible sur le dashboard principal.",
+        "L'indicateur de progression doit afficher le nombre de résumés complétés par rapport au total des résumés attendus.",
+        "L'indicateur de progression doit être mis à jour en temps réel lorsque l'utilisateur complète ou modifie un résumé.",
+        "L'indicateur de progression doit être clair et facile à comprendre pour l'utilisateur."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 3.0
+    },
+    {
+      "theme": "Notifications",
+      "idea": "Développer un système de notifications automatiques pour les résumés prêts",
+      "title": "Notifications automatiques pour résumés prêts",
+      "why": "Améliorer l'expérience utilisateur en fournissant des mises à jour en temps réel sur la disponibilité des résumés",
+      "confidence": 0.9,
+      "summary": "Développer un système de notifications automatiques pour les résumés prêts",
+      "user_story": "En tant que responsable de projet, je veux développer un système de notifications automatiques pour les résumés prêts afin de réduire les délais de communication et d'améliorer la satisfaction des utilisateurs.",
+      "acceptance_criteria": [
+        "Le système envoie une notification automatique aux utilisateurs dans les 5 minutes suivant la disponibilité d'un résumé.",
+        "Les notifications sont personnalisables en fonction des préférences de l'utilisateur, incluant le choix du canal de notification (e-mail, SMS, etc.).",
+        "Le système conserve un historique des notifications envoyées pour permettre un suivi et une analyse des performances.",
+        "Les notifications incluent un lien direct vers le résumé pour faciliter l'accès rapide aux informations."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 3.0
+    },
+    {
+      "theme": "Filtre projet",
+      "idea": "Ajouter la fonctionnalité de sauvegarde de vues personnalisées",
+      "title": "Sauvegarde de vues personnalisées",
+      "why": "Permettre aux utilisateurs de conserver leurs paramètres de filtre préférés et de les réutiliser facilement",
+      "confidence": 0.9,
+      "summary": "Pouvoir sauvegarder des vues personnalisées",
+      "user_story": "En tant qu'utilisateur avancé, je veux pouvoir sauvegarder des vues personnalisées afin de personnaliser mon expérience d'utilisation et de gagner du temps en évitant de réconfigurer les vues à chaque utilisation.",
+      "acceptance_criteria": [
+        "La fonctionnalité de sauvegarde de vues personnalisées est accessible depuis le menu principal de l'application.",
+        "Les vues sauvegardées sont affichées dans une liste déroulante permettant à l'utilisateur de les sélectionner et de les appliquer facilement.",
+        "La sauvegarde d'une vue personnalisée inclut tous les paramètres de personnalisation définis par l'utilisateur, tels que les colonnes affichées, les filtres et les tri.",
+        "L'application permet à l'utilisateur de supprimer ou de renommer les vues sauvegardées.",
+        "Les vues sauvegardées sont conservées même après la fermeture de l'application ou le redémarrage du système."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Filtre projet",
+      "idea": "Développer un système de filtre avancé sur la page projet",
+      "title": "Filtre avancé pour projets",
+      "why": "Permettre aux utilisateurs de personnaliser leur vue et de gagner du temps dans la recherche d'informations",
+      "confidence": 0.8,
+      "summary": "Avoir accès à un système de filtre avancé sur la page projet",
+      "user_story": "En tant que gestionnaire de projet, je veux avoir accès à un système de filtre avancé sur la page projet afin de faciliter la recherche et la sélection des projets spécifiques.",
+      "acceptance_criteria": [
+        "Le système de filtre doit permettre de rechercher des projets en fonction de leur nom, de leur statut et de leur date de création.",
+        "Le système de filtre doit être capable de gérer des combinaisons de critères de recherche pour affiner les résultats.",
+        "Le système de filtre doit afficher les résultats de la recherche de manière claire et organisée, avec la possibilité de trier les projets par ordre alphabétique ou par date de création.",
+        "Le système de filtre doit être accessible et utilisable sur différents appareils et navigateurs web.",
+        "Le système de filtre doit être intégré de manière transparente à la page projet existante, sans affecter les fonctionnalités actuelles."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "sections": {
+    "context": "",
+    "key_points": [],
+    "decisions": [],
+    "risks": [],
+    "next_steps": []
+  },
+  "top_user_stories": [
+    {
+      "title": "Indicateur de progression pour les résumés",
+      "priority": "Moyenne",
+      "theme": "Dashboard"
+    },
+    {
+      "title": "Notifications automatiques pour résumés prêts",
+      "priority": "Moyenne",
+      "theme": "Notifications"
+    },
+    {
+      "title": "Sauvegarde de vues personnalisées",
+      "priority": "Moyenne",
+      "theme": "Filtre projet"
+    }
+  ],
+  "consulting_summary": {
+    "user_stories": [
+      {
+        "theme": "Dashboard",
+        "idea": "Ajouter un indicateur de progression pour les résumés sur le dashboard",
+        "title": "Indicateur de progression pour les résumés",
+        "why": "Réduire le temps d'attente perçu par les utilisateurs et améliorer leur expérience globale",
+        "confidence": 0.8,
+        "summary": "Avoir un indicateur de progression pour les résumés",
+        "user_story": "En tant qu'utilisateur du dashboard, je veux avoir un indicateur de progression pour les résumés afin de mieux suivre mon avancement et de planifier mes tâches de manière efficace.",
+        "acceptance_criteria": [
+          "L'indicateur de progression doit être visible sur le dashboard principal.",
+          "L'indicateur de progression doit afficher le nombre de résumés complétés par rapport au total des résumés attendus.",
+          "L'indicateur de progression doit être mis à jour en temps réel lorsque l'utilisateur complète ou modifie un résumé.",
+          "L'indicateur de progression doit être clair et facile à comprendre pour l'utilisateur."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 3.0
+      },
+      {
+        "theme": "Notifications",
+        "idea": "Développer un système de notifications automatiques pour les résumés prêts",
+        "title": "Notifications automatiques pour résumés prêts",
+        "why": "Améliorer l'expérience utilisateur en fournissant des mises à jour en temps réel sur la disponibilité des résumés",
+        "confidence": 0.9,
+        "summary": "Développer un système de notifications automatiques pour les résumés prêts",
+        "user_story": "En tant que responsable de projet, je veux développer un système de notifications automatiques pour les résumés prêts afin de réduire les délais de communication et d'améliorer la satisfaction des utilisateurs.",
+        "acceptance_criteria": [
+          "Le système envoie une notification automatique aux utilisateurs dans les 5 minutes suivant la disponibilité d'un résumé.",
+          "Les notifications sont personnalisables en fonction des préférences de l'utilisateur, incluant le choix du canal de notification (e-mail, SMS, etc.).",
+          "Le système conserve un historique des notifications envoyées pour permettre un suivi et une analyse des performances.",
+          "Les notifications incluent un lien direct vers le résumé pour faciliter l'accès rapide aux informations."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 3.0
+      },
+      {
+        "theme": "Filtre projet",
+        "idea": "Ajouter la fonctionnalité de sauvegarde de vues personnalisées",
+        "title": "Sauvegarde de vues personnalisées",
+        "why": "Permettre aux utilisateurs de conserver leurs paramètres de filtre préférés et de les réutiliser facilement",
+        "confidence": 0.9,
+        "summary": "Pouvoir sauvegarder des vues personnalisées",
+        "user_story": "En tant qu'utilisateur avancé, je veux pouvoir sauvegarder des vues personnalisées afin de personnaliser mon expérience d'utilisation et de gagner du temps en évitant de réconfigurer les vues à chaque utilisation.",
+        "acceptance_criteria": [
+          "La fonctionnalité de sauvegarde de vues personnalisées est accessible depuis le menu principal de l'application.",
+          "Les vues sauvegardées sont affichées dans une liste déroulante permettant à l'utilisateur de les sélectionner et de les appliquer facilement.",
+          "La sauvegarde d'une vue personnalisée inclut tous les paramètres de personnalisation définis par l'utilisateur, tels que les colonnes affichées, les filtres et les tri.",
+          "L'application permet à l'utilisateur de supprimer ou de renommer les vues sauvegardées.",
+          "Les vues sauvegardées sont conservées même après la fermeture de l'application ou le redémarrage du système."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 2.5
+      },
+      {
+        "theme": "Filtre projet",
+        "idea": "Développer un système de filtre avancé sur la page projet",
+        "title": "Filtre avancé pour projets",
+        "why": "Permettre aux utilisateurs de personnaliser leur vue et de gagner du temps dans la recherche d'informations",
+        "confidence": 0.8,
+        "summary": "Avoir accès à un système de filtre avancé sur la page projet",
+        "user_story": "En tant que gestionnaire de projet, je veux avoir accès à un système de filtre avancé sur la page projet afin de faciliter la recherche et la sélection des projets spécifiques.",
+        "acceptance_criteria": [
+          "Le système de filtre doit permettre de rechercher des projets en fonction de leur nom, de leur statut et de leur date de création.",
+          "Le système de filtre doit être capable de gérer des combinaisons de critères de recherche pour affiner les résultats.",
+          "Le système de filtre doit afficher les résultats de la recherche de manière claire et organisée, avec la possibilité de trier les projets par ordre alphabétique ou par date de création.",
+          "Le système de filtre doit être accessible et utilisable sur différents appareils et navigateurs web.",
+          "Le système de filtre doit être intégré de manière transparente à la page projet existante, sans affecter les fonctionnalités actuelles."
+        ],
+        "priority": "Moyenne",
+        "relevance_score": 1.5
+      }
+    ],
+    "segments": [
+      {
+        "theme": "Dashboard",
+        "content": "Alors pour améliorer Mindloop, on doit revoir l'expérience sur le dashboard. Les utilisateurs trouvent que les résumés mettent trop de temps à se charger, donc il faudrait un indicateur clair de progression."
+      },
+      {
+        "theme": "Filtre Projet",
+        "content": "Ensuite, plusieurs PO demandent un système de filtre sur la page projet avec la possibilité de sauvegarder des vues personnalisées."
+      },
+      {
+        "theme": "Notifications",
+        "content": "Enfin, on manque encore de notifications automatiques lorsque les résumés sont prêts."
+      }
+    ],
+    "quality": {
+      "confidence": 0.85,
+      "diversity": 0.75,
+      "pertinence": 1.0,
+      "global_score": 0.85
+    },
+    "meeting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    },
+    "consulting_summary": {
+      "context": "",
+      "key_points": [],
+      "decisions": [],
+      "risks": [],
+      "next_steps": []
+    }
+  }
+}
