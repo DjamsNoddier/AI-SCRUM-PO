@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Mic, Pause, Play, Square } from "lucide-react";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
+import ProcessingModal from "../components/ProcessingModal";
 
 type LocationState = { meetingTitle?: string };
 
@@ -30,6 +31,8 @@ export default function RecordingView() {
 
   const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
   const secs = String(seconds % 60).padStart(2, "0");
+  const [showProcessing, setShowProcessing] = useState(false);
+
 
   return (
     <div
@@ -131,12 +134,12 @@ export default function RecordingView() {
               </button>
 
               <button
-                onClick={async () => {
-                  setIsStopping(true);
-                  await stopRecording();
-                  navigate(`/app/summary/${sessionId}`);
+              onClick={async () => {
+                setIsStopping(true);
+                setShowProcessing(true);   // 🌟 montre le modal premium
+                await stopRecording();     // laisse ton IA bosser tranquillement
+                navigate(`/app/summary/${sessionId}`);
                 }}
-                
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-xs font-semibold text-white shadow-lg hover:bg-red-700 active:scale-[0.97] min-w-[120px]"
               >
                 <Square size={14} />
@@ -144,24 +147,15 @@ export default function RecordingView() {
               </button>
             </>
           )}
-
-          {isStopping && (
-            <button
-              disabled
-              className="inline-flex items-center justify-center rounded-xl bg-white/10 px-5 py-3 text-xs font-semibold text-slate-400 cursor-not-allowed min-w-[160px]"
-            >
-              ⏳ Finalizing…
-            </button>
-          )}
         </div>
       </div>
-
       <style>{`
         @keyframes pulseWave {
           0%, 100% { transform: scaleY(0.8); }
           50% { transform: scaleY(1.4); }
         }
       `}</style>
+      <ProcessingModal isOpen={showProcessing} />
     </div>
   );
 }

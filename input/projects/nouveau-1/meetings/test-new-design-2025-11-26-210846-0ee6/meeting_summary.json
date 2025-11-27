@@ -1,0 +1,42 @@
+{
+  "meeting_id": "meeting_2025-11-26_210846_0ee6",
+  "audio_path": "input/projects/nouveau-1/meetings/test-new-design-2025-11-26-210846-0ee6/recording.wav",
+  "created_at": "2025-11-26T21:09:05.109645",
+  "user_stories": [],
+  "user_stories_count": 0,
+  "themes": [],
+  "quality": {
+    "confidence": 0,
+    "diversity": 0,
+    "pertinence": 0,
+    "global_score": 0
+  },
+  "sections": {
+    "context": "Pas de contexte clair fourni",
+    "key_points": [
+      "Pas de points clés identifiables"
+    ],
+    "decisions": [
+      "Aucune décision clairement prise"
+    ],
+    "risks": [
+      "Pas de risques spécifiques mentionnés"
+    ],
+    "next_steps": [
+      "Pas d'étapes suivantes définies"
+    ]
+  },
+  "top_user_stories": [],
+  "consulting_summary": {
+    "context": "Réunion sans contenu spécifique, transcription brute non informative",
+    "key_points": [],
+    "decisions": [],
+    "risks": [
+      "Manque d'informations pour identifier les risques"
+    ],
+    "next_steps": [
+      "Demander des informations supplémentaires",
+      "Réévaluer les objectifs de la réunion"
+    ]
+  }
+}

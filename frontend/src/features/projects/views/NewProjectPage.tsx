@@ -50,13 +50,12 @@ export default function NewProjectPage() {
           </div>
 
           <div className="px-6 py-6">
-            <ProjectForm
-              onSuccess={() => {
-                // Pour l'instant : simple retour ou redirection où tu veux
-                navigate("/app/projects");
-              }}
-              primaryIcon={<Save size={18} />}
-            />
+          <ProjectForm
+            onSuccess={(projectId: string) => {
+              navigate(`/app/projects/${projectId}`);
+            }}
+            primaryIcon={<Save size={18} />}
+          />
           </div>
         </div>
       </div>

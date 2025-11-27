@@ -4,7 +4,7 @@ import type { ProjectCreatePayload } from "../types";
 import toast from "react-hot-toast";
 
 interface ProjectFormProps {
-  onSuccess: () => void;
+  onSuccess: (projectId: string) => void;   // ✅ Correction du typage
   primaryIcon?: React.ReactNode;
 }
 
@@ -35,10 +35,15 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
       });
 
       if (response.status === 201) {
+        const createdId = response.data.id;   // 🔥 ID du nouveau projet
+
         toast.success(`Projet « ${response.data.title} » créé avec succès ✅`);
+
+        // Reset des inputs (pas obligatoire mais propre)
         setTitle("");
         setDescription("");
-        onSuccess();
+
+        onSuccess(createdId);   // 🔥 Appel correct avec l'ID
       }
     } catch (error: any) {
       const errorMessage =
@@ -65,6 +70,7 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
             Visible dans la liste de tes projets.
           </p>
         </div>
+
         <input
           id="title"
           type="text"
@@ -90,6 +96,7 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
             Explique le contexte, les objectifs et le périmètre.
           </p>
         </div>
+
         <textarea
           id="description"
           value={description}

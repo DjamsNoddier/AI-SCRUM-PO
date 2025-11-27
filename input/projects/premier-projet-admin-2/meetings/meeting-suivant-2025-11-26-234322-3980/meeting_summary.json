@@ -1,0 +1,150 @@
+{
+  "meeting_id": "meeting_2025-11-26_234322_3980",
+  "audio_path": "input/projects/premier-projet-admin-2/meetings/meeting-suivant-2025-11-26-234322-3980/recording.wav",
+  "created_at": "2025-11-26T23:44:28.616439",
+  "user_stories": [
+    {
+      "theme": "Problèmes de chargement",
+      "idea": "Optimiser les performances du dashboard",
+      "title": "Amélioration des performances du dashboard",
+      "why": "Pour améliorer l'expérience utilisateur et réduire les temps d'attente",
+      "confidence": 0.8,
+      "summary": "Améliorer les performances du dashboard",
+      "user_story": "En tant qu'administrateur système, je veux améliorer les performances du dashboard afin de réduire le temps de chargement et d'améliorer l'expérience utilisateur.",
+      "acceptance_criteria": [
+        "Le temps de chargement du dashboard est inférieur à 2 secondes",
+        "Le nombre de requêtes à la base de données est réduit de 30%",
+        "La mémoire utilisée par le dashboard est inférieure à 500 Mo",
+        "Le taux de réussite des requêtes est supérieur à 95%"
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Problème d'enregistrement",
+      "idea": "Améliorer la synchronisation audio/vidéo lors de l'enregistrement",
+      "title": "Synchronisation audio/vidéo améliorée",
+      "why": "Éviter les décalages et les perturbations sonores pour une expérience utilisateur fluide",
+      "confidence": 0.8,
+      "summary": "Améliorer la synchronisation audio/vidéo lors de l'enregistrement",
+      "user_story": "En tant que réalisateur de contenu, je veux améliorer la synchronisation audio/vidéo lors de l'enregistrement afin de garantir une expérience utilisateur fluide et de haute qualité.",
+      "acceptance_criteria": [
+        "La différence de temps entre l'audio et la vidéo lors de l'enregistrement est inférieure à 10 millisecondes.",
+        "Le système permet une synchronisation automatique de l'audio et de la vidéo en temps réel.",
+        "La qualité de l'enregistrement reste inchangée même après la synchronisation, avec une résolution et une fréquence d'images identiques à celles de l'original.",
+        "Le processus de synchronisation est transparent pour l'utilisateur, sans nécessiter d'intervention manuelle."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Amélioration du menu",
+      "idea": "Concevoir un menu qui s'adapte à la page et ne reste pas fixe",
+      "title": "Menu adaptatif pour améliorer la navigation",
+      "why": "Pour améliorer l'expérience utilisateur sur la landing page",
+      "confidence": 0.8,
+      "summary": "Concevoir un menu qui s'adapte à la page et ne reste pas fixe",
+      "user_story": "En tant que développeur web, je veux concevoir un menu qui s'adapte à la page et ne reste pas fixe afin d'améliorer l'expérience utilisateur et de faciliter la navigation sur le site.",
+      "acceptance_criteria": [
+        "Le menu doit s'adapter automatiquement à la largeur de l'écran de l'utilisateur.",
+        "Le menu doit être complètement visible et fonctionnel sur les appareils mobiles et les ordinateurs de bureau.",
+        "Le menu doit être capable de se rétracter ou de se déployer en fonction de la position de défilement de la page.",
+        "Le menu doit être cohérent avec le design et la mise en page du site web.",
+        "Le menu doit être testé et valider sur différents navigateurs et appareils pour garantir sa compatibilité."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 2.5
+    },
+    {
+      "theme": "Expérience utilisateur",
+      "idea": "Développer un système de débogage pour les boutons",
+      "title": "Débogage des boutons dapplication",
+      "why": "Les boutons clignotent, indiquant des problèmes techniques à résoudre pour améliorer l'expérience utilisateur",
+      "confidence": 0.8,
+      "summary": "Avoir un système de débogage pour les boutons",
+      "user_story": "En tant que développeur, je veux avoir un système de débogage pour les boutons afin de résoudre rapidement les problèmes de fonctionnement et améliorer la qualité globale de l'application.",
+      "acceptance_criteria": [
+        "Le système de débogage peut identifier les erreurs de clic sur les boutons avec une précision de 95% ou plus.",
+        "Le système fournit des informations détaillées sur les événements de clic, y compris la date, l'heure et les données de l'utilisateur.",
+        "Le système de débogage est intégré à l'interface de développement existante, permettant aux développeurs d'accéder facilement aux journaux de débogage.",
+        "Le système peut être configuré pour envoyer des alertes automatiques aux développeurs en cas d'erreurs répétées sur les boutons."
+      ],
+      "priority": "Moyenne",
+      "relevance_score": 1.5
+    }
+  ],
+  "user_stories_count": 4,
+  "themes": [
+    "Amélioration du menu",
+    "Expérience utilisateur",
+    "Problème d'enregistrement",
+    "Problèmes de chargement"
+  ],
+  "quality": {
+    "confidence": 0.8,
+    "diversity": 1.0,
+    "pertinence": 1.0,
+    "global_score": 0.9
+  },
+  "sections": {
+    "context": "Réunion de suivi de produit pour discuter des feedbacks utilisateurs et des améliorations à apporter",
+    "key_points": [
+      "Problèmes de performance du dashboard (temps de chargement, bugs)",
+      "Décalage lors de la phase d'enregistrement",
+      "Manque de header fixe dans le menu"
+    ],
+    "decisions": [
+      "Ajouter les incidents en backlog pour résoudre les problèmes de performance du dashboard",
+      "Améliorer la phase d'enregistrement pour réduire le décalage"
+    ],
+    "risks": [
+      "Impact négatif sur l'expérience utilisateur si les problèmes de performance ne sont pas résolus",
+      "Perte de confiance des utilisateurs si les bugs ne sont pas corrigés"
+    ],
+    "next_steps": [
+      "Prioriser les incidents en backlog pour résoudre les problèmes de performance du dashboard",
+      "Planifier des améliorations pour la phase d'enregistrement et le menu"
+    ]
+  },
+  "top_user_stories": [
+    {
+      "title": "Amélioration des performances du dashboard",
+      "priority": "Moyenne",
+      "theme": "Problèmes de chargement"
+    },
+    {
+      "title": "Synchronisation audio/vidéo améliorée",
+      "priority": "Moyenne",
+      "theme": "Problème d'enregistrement"
+    },
+    {
+      "title": "Menu adaptatif pour améliorer la navigation",
+      "priority": "Moyenne",
+      "theme": "Amélioration du menu"
+    }
+  ],
+  "consulting_summary": {
+    "context": "Le meeting a porté sur les problèmes techniques et les améliorations à apporter à l'application, notamment en ce qui concerne le chargement du dashboard, les bugs sur les boutons, la synchronisation audio/vidéo lors de l'enregistrement et le menu adaptatif.",
+    "key_points": [
+      "Problèmes de chargement du dashboard",
+      "Bugs sur les boutons",
+      "Synchronisation audio/vidéo lors de l'enregistrement",
+      "Menu adaptatif"
+    ],
+    "decisions": [
+      "Mettre en place un système de débogage pour les boutons",
+      "Améliorer la synchronisation audio/vidéo lors de l'enregistrement",
+      "Concevoir un menu qui s'adapte à la page"
+    ],
+    "risks": [
+      "Retard dans la résolution des problèmes techniques",
+      "Impact négatif sur l'expérience utilisateur",
+      "Incompatibilité avec certains navigateurs ou appareils"
+    ],
+    "next_steps": [
+      "Prioriser les tâches de débogage et d'amélioration",
+      "Attribuer des ressources pour la résolution des problèmes techniques",
+      "Planifier des tests pour valider les améliorations apportées"
+    ]
+  }
+}

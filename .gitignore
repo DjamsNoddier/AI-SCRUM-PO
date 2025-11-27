@@ -14,9 +14,24 @@ input/sessions/*.wav
 input/sessions/*.json
 input/*.wav
 input/*.mp3
+.input/
 
 # Fichiers temporaires / IDE
 .DS_Store
 .idea/
 *.log
+*.logs
 input/sessions/
+
+# Pour les fichiers de logs ou caches côté backend
+logs/
+tmp/
+temp/
+
+# Pour le frontend / Node.js (si tu as un frontend JS/TS)
+node_modules/
+dist/
+build/
+.vite/
+.cache/
+*.tsbuildinfo
