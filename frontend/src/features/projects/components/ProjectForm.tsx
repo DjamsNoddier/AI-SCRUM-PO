@@ -4,7 +4,7 @@ import type { ProjectCreatePayload } from "../types";
 import toast from "react-hot-toast";
 
 interface ProjectFormProps {
-  onSuccess: (projectId: string) => void;   // ✅ Correction du typage
+  onSuccess: (projectId: string) => void;
   primaryIcon?: React.ReactNode;
 }
 
@@ -15,41 +15,28 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      toast.error("Vous devez être connecté pour créer un projet.");
-      return;
-    }
-
     setIsLoading(true);
 
     const payload: ProjectCreatePayload = { title, description };
 
     try {
-      const response = await api.post("/projects", payload, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // 🍪 COOKIE-BASED — aucun token, aucun header Authorization
+      const res = await api.post("/projects", payload);
 
-      if (response.status === 201) {
-        const createdId = response.data.id;   // 🔥 ID du nouveau projet
+      if (res.status === 201) {
+        const createdId = res.data.id;
 
-        toast.success(`Projet « ${response.data.title} » créé avec succès ✅`);
+        toast.success(`Projet « ${res.data.title} » créé avec succès ✅`);
 
-        // Reset des inputs (pas obligatoire mais propre)
         setTitle("");
         setDescription("");
 
-        onSuccess(createdId);   // 🔥 Appel correct avec l'ID
+        onSuccess(createdId);
       }
     } catch (error: any) {
-      const errorMessage =
-        error?.response?.data?.detail ||
-        "Erreur lors de la création du projet.";
-      toast.error(`❌ Échec : ${errorMessage}`);
+      const message =
+        error?.response?.data?.detail || "Erreur lors de la création du projet.";
+      toast.error(`❌ ${message}`);
     } finally {
       setIsLoading(false);
     }
@@ -60,15 +47,10 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
       {/* Titre */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-200"
-          >
+          <label htmlFor="title" className="block text-sm font-medium text-gray-200">
             Titre du projet
           </label>
-          <p className="text-xs text-gray-500">
-            Visible dans la liste de tes projets.
-          </p>
+          <p className="text-xs text-gray-500">Visible dans la liste de tes projets.</p>
         </div>
 
         <input
@@ -79,17 +61,16 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
           required
           maxLength={100}
           placeholder="Ex : Refonte CRM Commercial"
-          className="w-full rounded-xl border border-gray-800 bg-gray-900/60 px-3 py-2.5 text-sm text-white placeholder-gray-500 shadow-inner shadow-black/30 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+          className="w-full rounded-xl border border-gray-800 bg-gray-900/60 px-3 py-2.5 
+                     text-sm text-white placeholder-gray-500 shadow-inner shadow-black/30 
+                     focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
         />
       </div>
 
       {/* Description */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-200"
-          >
+          <label htmlFor="description" className="block text-sm font-medium text-gray-200">
             Description
           </label>
           <p className="text-xs text-gray-500">
@@ -104,7 +85,9 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
           required
           rows={4}
           placeholder="Ex : Projet visant à restructurer le CRM interne, améliorer la saisie commerciale et intégrer un scoring IA."
-          className="w-full rounded-xl border border-gray-800 bg-gray-900/60 px-3 py-2.5 text-sm text-white placeholder-gray-500 shadow-inner shadow-black/30 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+          className="w-full rounded-xl border border-gray-800 bg-gray-900/60 px-3 py-2.5 
+                     text-sm text-white placeholder-gray-500 shadow-inner shadow-black/30 
+                     focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
         />
       </div>
 
@@ -113,7 +96,12 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
         <button
           type="submit"
           disabled={isLoading}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-500 px-4 py-3 text-sm font-medium text-white shadow-lg shadow-blue-900/40 transition hover:from-blue-500 hover:via-blue-400 hover:to-indigo-400 hover:shadow-blue-700/40 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-xl 
+                     bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-500 px-4 py-3 
+                     text-sm font-medium text-white shadow-lg shadow-blue-900/40 
+                     transition hover:from-blue-500 hover:via-blue-400 hover:to-indigo-400 
+                     hover:shadow-blue-700/40 active:scale-[0.99] 
+                     disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isLoading ? (
             <>
@@ -130,12 +118,13 @@ export default function ProjectForm({ onSuccess, primaryIcon }: ProjectFormProps
                   r="10"
                   stroke="currentColor"
                   strokeWidth="4"
-                ></circle>
+                />
                 <path
                   className="opacity-75"
                   fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 
+                     1.135 5.824 3 7.938l3-2.647z"
+                />
               </svg>
               <span>Création en cours...</span>
             </>

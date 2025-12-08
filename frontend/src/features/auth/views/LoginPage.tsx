@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../shared/context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
   const { login, user } = useAuth();
@@ -17,28 +17,15 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
+  
     try {
-      const res = await fetch("http://localhost:8000/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!res.ok) throw new Error("Invalid credentials");
-
-      const data = await res.json();
-
-      login(
-        { id: data.user.id, email: data.user.email },
-        data.access_token
-      );
-
-      navigate("/dashboard");
+      await login(email, password);  // ✔ Appelle ton AuthContext
+  
+      navigate("/app/dashboard");    // ✔ redirection propre
     } catch {
       setError("Email ou mot de passe incorrect");
     }
-  };
+  };  
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-black text-slate-50 overflow-hidden">

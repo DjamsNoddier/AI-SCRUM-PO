@@ -7,9 +7,7 @@ export default function ProjectsPage() {
   const { projects, loading, error } = useProjects();
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden bg-black text-slate-50">
-      {/* Background */}
-      <FuturisticBackground />
+    <div className="relative w-full overflow-x-hidden bg-black text-slate-50">
 
       {/* CONTENT */}
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-10 md:px-8">
@@ -86,17 +84,5 @@ export default function ProjectsPage() {
         )}
       </div>
     </div>
-  );
-}
-
-/* FUTURISTIC BACKGROUND REUSED FROM HOMEPAGE */
-function FuturisticBackground() {
-  return (
-    <>
-      <div className="pointer-events-none absolute -inset-40 -z-20 bg-[radial-gradient(circle_at_top,_#1f2937_0,_#020617_60%,_#000_100%)]" />
-      <div className="pointer-events-none absolute -left-40 top-10 -z-10 h-80 w-80 rounded-full bg-fuchsia-500/20 blur-3xl" />
-      <div className="pointer-events-none absolute -right-40 top-40 -z-10 h-96 w-96 rounded-full bg-sky-500/25 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-emerald-400/15 blur-3xl" />
-    </>
   );
 }

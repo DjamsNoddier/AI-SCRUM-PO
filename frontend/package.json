@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",
+    "framer-motion": "^12.23.25",
     "idb-keyval": "^6.2.2",
     "lucide-react": "^0.553.0",
     "react": "^19.2.0",
@@ -19,6 +20,7 @@
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^6.25.1",
     "recharts": "^3.4.1",
+    "tailwind-merge": "^3.4.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

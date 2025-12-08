@@ -49,8 +49,3 @@ export async function createSession({ title, project_id }: { title: string, proj
   return response.data;
 }
 
-// features/meetings/api/meetingService.ts
-export async function getFakeMeeting() {
-  const res = await fetch("/api/v1/meetings/get-fake");
-  return res.json();
-}
